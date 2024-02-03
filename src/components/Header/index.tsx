@@ -2,7 +2,7 @@ import Image from "next/image"
 import { AiOutlineMenu } from "react-icons/ai"
 import logoHeader from "../../assets/img/logo-header.webp"
 import { Button3D } from "../Button3D"
-import { SearchInput } from "../SearchInput"
+import { SearchInputBox } from "../SearchInputBox"
 
 export const Header = () => {
   return (
@@ -19,7 +19,7 @@ export const Header = () => {
           </div>
           <Button3D type="button">Usar App</Button3D>
         </div>
-        <SearchInput />
+        <SearchInputBox />
       </header>
     </>
   )
