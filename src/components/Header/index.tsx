@@ -7,7 +7,7 @@ import { SearchInputBox } from "../SearchInputBox"
 export const Header = () => {
   return (
     <>
-      <header className="flex flex-col w-full gap-2">
+      <header className="flex flex-col w-full gap-2 mb-2 md:px-6">
         <div className="flex justify-between">
           <div className="flex items-center gap-4">
             <AiOutlineMenu size={18} />
@@ -19,7 +19,6 @@ export const Header = () => {
           </div>
           <Button3D type="button">Usar App</Button3D>
         </div>
-        <SearchInputBox />
       </header>
     </>
   )

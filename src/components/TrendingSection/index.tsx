@@ -1,7 +1,15 @@
-import React from "react"
+import React, { useRef } from "react"
 import { SearchMenuOption } from "../SearchMenuOption"
 
-export const TrendingSection = () => {
+interface TrendingSectionProps {
+  trendSelected?: number
+}
+
+export const TrendingSection = ({ trendSelected }: TrendingSectionProps) => {
+  const trending = useRef(null)
+  const nft = useRef(null)
+  const categories = useRef(null)
+
   const simulate = () => {
     // ! EXCLUIR APÓS INTEGRAÇÃO
     const componentsArray = []
@@ -21,7 +29,10 @@ export const TrendingSection = () => {
   return (
     <section className="max-h-[calc(100vh-180px)] overflow-y-auto">
       <section className="flex flex-col">
-        <div className="w-full flex whitespace-nowrap gap-1 items-center mt-2 my-1">
+        <div
+          ref={trending}
+          className="w-full flex whitespace-nowrap gap-1 items-center mt-2 my-1"
+        >
           <span className="w-fit text-xs text-[#64748b]">
             Pesquisa de Trending 🔥
           </span>
@@ -30,14 +41,20 @@ export const TrendingSection = () => {
         {simulate()}
       </section>
       <section className="flex flex-col">
-        <div className="w-full flex whitespace-nowrap gap-1 items-center mt-2 my-1">
+        <div
+          ref={nft}
+          className="w-full flex whitespace-nowrap gap-1 items-center mt-2 my-1"
+        >
           <span className="w-fit text-xs text-[#64748b]">Trending NFT 💎</span>
           <div className="w-full border-b border-gray-200" />
         </div>
         {simulate()}
       </section>
       <section className="flex flex-col">
-        <div className="w-full flex whitespace-nowrap gap-1 items-center mt-2 my-1">
+        <div
+          ref={categories}
+          className="w-full flex whitespace-nowrap gap-1 items-center mt-2 my-1"
+        >
           <span className="w-fit text-xs text-[#64748b]">
             Categorias de Treding ✨
           </span>
