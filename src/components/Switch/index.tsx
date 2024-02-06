@@ -25,8 +25,8 @@ export const Switch = ({
       <div
         onClick={switcher}
         className={`relative transition-all duration-100 ease-linear ${
-          isActive ? " bg-[#4bcc00]" : "bg-[#eff2f5]"
-        } items-center w-full max-w-[3rem] min-h-4 max-h-4 bg-[#eff2f5] rounded-md z-1`}
+          isActive ? "bg-[#4bcc00]" : "bg-[#eff2f5]"
+        } items-center w-full max-w-[3rem] min-h-4 max-h-4 rounded-md z-1`}
       >
         <div
           className={`top-[-4px] transition-all duration-100 ease-linear  absolute flex items-center justify-center min-w-[25px] min-h-[25px] bg-white rounded-lg border-2 ${
