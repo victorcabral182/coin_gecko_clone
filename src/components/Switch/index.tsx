@@ -18,7 +18,7 @@ export const Switch = ({
   textRight,
 }: SwitchProps) => {
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-2 mb-4">
       {textLeft && (
         <span className="text-gray-700 font-semibold text-sm">{textLeft}</span>
       )}
