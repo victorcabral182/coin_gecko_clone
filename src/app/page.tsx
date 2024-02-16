@@ -1,5 +1,7 @@
 "use client"
 
+import { AiFillStar } from "react-icons/ai"
+import { AiOutlineStar } from "react-icons/ai"
 import { CapitalizationRow } from "@/components/CapitalizationRow"
 import { MainNews } from "@/components/MainNews"
 import { SearchInputBox } from "@/components/SearchInputBox"
@@ -20,23 +22,48 @@ export default function Home() {
   ]
 
   const columns: GridColDef[] = [
-    { field: "rank", headerName: "#" },
+    {
+      field: "rank",
+      headerName: "#",
+      headerAlign: "right",
+      width: 60,
+      renderCell: (e) => {
+        const [isFavorite, switcherFavorite] = useReducer(
+          (isFavorite) => !isFavorite,
+          false
+        )
+        return (
+          <div className="w-full flex justify-center items-center text-center">
+            <div className="w-full" onClick={switcherFavorite}>
+              {isFavorite ? (
+                <AiFillStar size={18} color="#ffd11a" width="100%" />
+              ) : (
+                <AiOutlineStar size={18} width="100%" />
+              )}
+            </div>
+            <span className="w-full">{e.row.rank}</span>
+          </div>
+        )
+      },
+    },
     {
       field: "coin",
       headerName: "Moeda",
-      renderCell: (e) => (
-        <div className="flex items-center gap-2">
-          <Image width={24} height={24} src={a} alt="coin icon" />
-          <div className="flex flex-col">
-            <span className="text-[#334155] font-semibold text-sm mb-[-2px]">
-              Next.JS
-            </span>
-            <span className="text-[#64748b] font-regular text-xs mt-[-2px]">
-              NXT
-            </span>
+      renderCell: (e) => {
+        return (
+          <div className="flex items-center gap-2">
+            <Image width={24} height={24} src={a} alt="coin icon" />
+            <div className="flex flex-col">
+              <span className="text-[#334155] font-semibold text-sm mb-[-2px]">
+                Next.JS
+              </span>
+              <span className="text-[#64748b] font-regular text-xs mt-[-2px]">
+                NXT
+              </span>
+            </div>
           </div>
-        </div>
-      ),
+        )
+      },
     },
     {
       field: "price",
@@ -84,13 +111,13 @@ export default function Home() {
       )}
       <section>
         <DataGrid
+          rows={rows}
+          columns={columns}
           rowSelection={false}
           disableColumnMenu
           disableRowSelectionOnClick
           disableColumnFilter
           disableColumnSelector
-          rows={rows}
-          columns={columns}
         />
       </section>
     </main>
