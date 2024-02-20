@@ -59,7 +59,7 @@ export const useCoinGeckoService = () => {
   }
 
   const getCoinsPaged = async (data: IGetCoinsPaged) => {
-    return await API.get("/coins/markets", {
+    return await API.get<any[]>("/coins/markets", {
       params: {
         vs_currency: "usd",
         locale: "en",

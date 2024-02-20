@@ -23,7 +23,7 @@ export default function Home() {
 
   async function tryGetCoinsMarket() {
     try {
-      const response = await getCoinsPaged({
+      const response: any = await getCoinsPaged({
         per_page: 50,
         page: 1,
         order: "market_cap_desc",
