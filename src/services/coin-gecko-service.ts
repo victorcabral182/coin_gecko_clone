@@ -1,4 +1,5 @@
 import axios from "axios"
+import cache from "memory-cache"
 
 interface IGetCoinsPaged {
   ids?: string[]
@@ -59,13 +60,26 @@ export const useCoinGeckoService = () => {
   }
 
   const getCoinsPaged = async (data: IGetCoinsPaged) => {
-    return await API.get<any[]>("/coins/markets", {
+    const cacheKey = JSON.stringify(data)
+
+    const cachedData = cache.get(cacheKey)
+    if (cachedData) {
+      console.log("Retornando dados em cache")
+      return cachedData
+    }
+
+    const response = await API.get<any[]>("/coins/markets", {
       params: {
         vs_currency: "usd",
         locale: "en",
         ...data,
       },
     })
+
+    const cacheTimeout = 60 * 60 * 1000
+    cache.put(cacheKey, response.data, cacheTimeout)
+
+    return response.data
   }
 
   return { checkApiStatus, getCoinsPaged }

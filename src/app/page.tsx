@@ -28,11 +28,8 @@ export default function Home() {
         page: 1,
         order: "market_cap_desc",
       })
-      setData(
-        response.map((item, index) => {
-          return { ...item, id: index }
-        })
-      )
+      console.log(response)
+      setData(response)
     } catch (err) {
       console.log(err)
     }
@@ -51,8 +48,8 @@ export default function Home() {
       width: 60,
       renderCell: (e) => {
         const handleFavorite = (id: number) => {
-          setData((prevRows) => {
-            const updatedRows = prevRows.map((row) =>
+          setData((prevData) => {
+            const updatedRows = prevData.map((row) =>
               row.id === id ? { ...row, isFavorite: !row.isFavorite } : row
             )
             return updatedRows
@@ -60,14 +57,17 @@ export default function Home() {
         }
         return (
           <div className="w-full flex justify-center items-center text-center">
-            <div className="w-full" onClick={() => handleFavorite(e.row.id)}>
+            <div
+              className="w-full"
+              onClick={() => handleFavorite(e.row.market_cap_rank)}
+            >
               {e.row.isFavorite ? (
                 <AiFillStar size={18} color="#ffd11a" width="100%" />
               ) : (
                 <AiOutlineStar size={18} width="100%" />
               )}
             </div>
-            <span className="w-full">{e.row.rank}</span>
+            <span className="w-full">{e.row.market_cap_rank}</span>
           </div>
         )
       },
@@ -77,21 +77,24 @@ export default function Home() {
       headerName: "Moeda",
       width: 150,
       renderCell: (e) => {
-        console.log(e.row.data)
+        const imageLoader = ({ src, width, quality }) => {
+          return e.row.image
+        }
         return (
           <div className="flex items-center gap-2">
             <Image
               width={24}
               height={24}
-              src={e.row.data.image}
+              src="me.png"
               alt="coin icon"
+              loader={imageLoader}
             />
             <div className="flex flex-col">
               <span className="text-[#334155] font-semibold text-sm mb-[-2px]">
-                Next.JS
+                {e?.row?.name}
               </span>
-              <span className="text-[#64748b] font-regular text-xs mt-[-2px]">
-                NXT
+              <span className="text-[#64748b] font-regular text-xs mt-[-2px] uppercase  ">
+                {e?.row?.symbol}
               </span>
             </div>
           </div>
@@ -106,8 +109,7 @@ export default function Home() {
       align: "right",
       renderCell: (e: any) => (
         <span>
-          US${" "}
-          {e.row.price.toLocaleString("en-US", {
+          {e?.row?.current_price?.toLocaleString("en-US", {
             style: "currency",
             currency: "USD",
           })}
