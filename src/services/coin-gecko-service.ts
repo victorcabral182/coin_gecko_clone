@@ -75,7 +75,7 @@ export const useCoinGeckoService = () => {
   }
 
   const getCoinsPaged = async (data: IGetCoinsPagedParams) => {
-    const cacheKey = JSON.stringify("coinsPaged")
+    const cacheKey = JSON.stringify({ endpoint: "coinsPaged", params: data })
     const cachedData = cache.get(cacheKey)
     if (cachedData) {
       return cachedData
@@ -94,8 +94,8 @@ export const useCoinGeckoService = () => {
   }
 
   const getGlobalData = async (): Promise<IMarketData> => {
-    const cacheKey = JSON.stringify("globalData")
-    const cachedData = cache.get<IMarketData>(cacheKey)
+    const cacheKey = JSON.stringify({ endpoint: "globalData" })
+    const cachedData = cache.get<IMarketData | any>(cacheKey)
     if (cachedData) {
       return cachedData
     }
