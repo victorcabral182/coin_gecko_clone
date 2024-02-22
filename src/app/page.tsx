@@ -17,7 +17,8 @@ import {
 } from "@/services/coin-gecko-service"
 
 export default function Home() {
-  const { checkApiStatus, getCoinsPaged } = useCoinGeckoService()
+  const { getCoinsPaged, getGlobalData } = useCoinGeckoService()
+  const [globalData, setGlobalData] = useState<any>(null)
   const [data, setData] = useState<any[]>([])
   const [isActive, switcher] = useReducer((isActive) => !isActive, false)
 
@@ -28,17 +29,25 @@ export default function Home() {
         page: 1,
         order: "market_cap_desc",
       })
-      console.log(response)
       setData(response)
     } catch (err) {
-      console.log(err)
+      console.error(err)
     }
   }
-  console.log(data)
+
+  async function tryGetGlobalData() {
+    try {
+      const response = await getGlobalData()
+      setGlobalData(response.data)
+    } catch (err) {
+      console.error(err)
+    }
+  }
 
   useEffect(() => {
     tryGetCoinsMarket()
-  }, [])
+    tryGetGlobalData()
+  }, []) // eslint-disable-line
 
   const columns: GridColDef[] = [
     {
@@ -121,7 +130,7 @@ export default function Home() {
   return (
     <main className="flex flex-col">
       <SearchInputBox />
-      <CapitalizationRow />
+      <CapitalizationRow data={globalData} />
       <MainNews />
       <Switch textLeft="Destaques" isActive={isActive} switcher={switcher} />
       {isActive && (
