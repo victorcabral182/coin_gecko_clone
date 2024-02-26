@@ -75,12 +75,18 @@ export const useCoinGeckoService = () => {
   }
 
   const getCoinsPaged = async (data: IGetCoinsPagedParams) => {
-    const cacheKey = JSON.stringify({ endpoint: "coinsPaged", params: data })
-    const cachedData = cache.get(cacheKey)
-    if (cachedData) {
-      return cachedData
+    let cachedData = localStorage.getItem("coinsPaged")
+    let lastUpdatedTime = localStorage.getItem("coinsPagedLastUpdated")
+    if (cachedData && lastUpdatedTime) {
+      const currentTime = new Date().getTime()
+      const timeDifference = currentTime - parseInt(lastUpdatedTime)
+      if (timeDifference <= 300000) {
+        return JSON.parse(cachedData)
+      } else {
+        localStorage.removeItem("coinsPaged")
+        localStorage.removeItem("coinsPagedLastUpdated")
+      }
     }
-    // TODO: Criar interface
     const response = await API.get<any[]>("/coins/markets", {
       params: {
         vs_currency: "usd",
@@ -88,22 +94,54 @@ export const useCoinGeckoService = () => {
         ...data,
       },
     })
-    const cacheTimeout = 60 * 60 * 1000
-    cache.put(cacheKey, response.data, cacheTimeout)
+    localStorage.setItem("coinsPaged", JSON.stringify(response.data))
+    localStorage.setItem(
+      "coinsPagedLastUpdated",
+      new Date().getTime().toString()
+    )
     return response.data
   }
 
   const getGlobalData = async (): Promise<IMarketData> => {
-    const cacheKey = JSON.stringify({ endpoint: "globalData" })
-    const cachedData = cache.get<IMarketData | any>(cacheKey)
-    if (cachedData) {
-      return cachedData
+    let cache = localStorage.getItem("globalData")
+    let lastUpdatedTime = localStorage.getItem("globalDataLastUpdated")
+    if (cache && lastUpdatedTime) {
+      const currentTime = new Date().getTime()
+      const timeDifference = currentTime - parseInt(lastUpdatedTime)
+      if (timeDifference <= 300000) {
+        return JSON.parse(cache)
+      } else {
+        localStorage.removeItem("globalData")
+        localStorage.removeItem("globalDataLastUpdated")
+      }
     }
     const response = await API.get<IMarketData>("/global")
-    const cacheTimeout = 60 * 60 * 1000
-    cache.put(cacheKey, response.data, cacheTimeout)
+    localStorage.setItem("globalData", JSON.stringify(response.data))
+    localStorage.setItem(
+      "globalDataLastUpdated",
+      new Date().getTime().toString()
+    )
     return response.data
   }
 
-  return { checkApiStatus, getCoinsPaged, getGlobalData }
+  const getTrending = async () => {
+    let cache = localStorage.getItem("trending")
+    let lastUpdatedTime = localStorage.getItem("trendingLastUpdated")
+    if (cache && lastUpdatedTime) {
+      const currentTime = new Date().getTime()
+      const timeDifference = currentTime - parseInt(lastUpdatedTime)
+      if (timeDifference <= 300000) {
+        return JSON.parse(cache)
+      } else {
+        localStorage.removeItem("trending")
+        localStorage.removeItem("trendingLastUpdated")
+      }
+    }
+    const response = await API.get<any>("/search/trending")
+    localStorage.setItem("trending", JSON.stringify(response))
+    localStorage.setItem("trendingLastUpdated", new Date().getTime().toString())
+    return response
+  }
+
+  return { checkApiStatus, getCoinsPaged, getGlobalData, getTrending }
 }

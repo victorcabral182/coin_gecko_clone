@@ -8,7 +8,7 @@ export const SearchInputBox = () => {
   const [open, openClose] = useReducer((open) => !open, false)
 
   return (
-    <div className="w-full md:px-6">
+    <div className="w-full md:px-6 xl:px-0">
       {!open ? (
         <div
           onClick={openClose}
