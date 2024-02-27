@@ -1,7 +1,5 @@
 import React from "react"
 import Image from "next/image"
-import { AiFillCaretUp } from "react-icons/ai"
-import a from "../../app/favicon.ico"
 import { checkCondition } from "@/utils/utils"
 import { FaCaretDown, FaCaretUp, FaMinus } from "react-icons/fa"
 
@@ -91,8 +89,20 @@ export const HighlightsBox = ({
                         <span className="text-sm text-[#334155] ml-2 self-center mr-1 font-semibold">
                           {e?.item?.data?.price}
                         </span>
-                        <span className="flex items-center  text-sm text-[#00a83e] font-semibold">
-                          <AiFillCaretUp size={14} />
+                        <span
+                          className={`flex items-center text-sm ${checkCondition(
+                            e?.item?.data?.price_change_percentage_24h?.usd
+                          )} font-semibold`}
+                        >
+                          {e?.item?.data?.price_change_percentage_24h?.usd >
+                          0 ? (
+                            <FaCaretUp className="inline" size={14} />
+                          ) : e?.item?.data?.price_change_percentage_24h?.usd <
+                            0 ? (
+                            <FaCaretDown className="inline" size={14} />
+                          ) : (
+                            <FaMinus className="inline" size={14} />
+                          )}
                           {e?.item?.data?.price_change_percentage_24h?.usd?.toFixed(
                             1
                           )}

@@ -37,6 +37,8 @@ export const GeneralContextProvider = ({ children }) => {
         per_page: 50,
         page: 1,
         order: "market_cap_desc",
+        price_change_percentage: "1h,24h,7d",
+        sparkline: true,
       })
       return response
     } catch (err) {

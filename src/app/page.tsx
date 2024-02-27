@@ -11,7 +11,9 @@ import { HighlightsBox } from "@/components/HighlightsBox"
 import { SearchInputBox } from "@/components/SearchInputBox"
 import { CapitalizationRow } from "@/components/CapitalizationRow"
 import { useGeneralContext } from "@/contexts/generalContext/GeneralContext"
-import { handleMarketCap } from "@/utils/utils"
+import { checkCondition, handleMarketCap } from "@/utils/utils"
+import { FaCaretDown, FaCaretUp, FaMinus } from "react-icons/fa"
+import { columnGroupsStateInitializer } from "@mui/x-data-grid/internals"
 
 export default function Home() {
   const { coinsMarket, globalData, setCoinsMarket, trending } =
@@ -62,27 +64,37 @@ export default function Home() {
     {
       field: "name",
       headerName: "Moeda",
-      width: 150,
+      flex: 1,
       renderCell: (e) => {
         const imageLoader = () => {
           return e.row.image
         }
         return (
-          <div className="flex items-center gap-2">
-            <Image
-              width={24}
-              height={24}
-              src="me.png"
-              alt="coin icon"
-              loader={imageLoader}
-            />
-            <div className="flex flex-col">
-              <span className="text-[#334155] font-semibold text-sm mb-[-2px]">
-                {e?.row?.name}
-              </span>
-              <span className="text-[#64748b] font-regular text-xs mt-[-2px] uppercase  ">
-                {e?.row?.symbol}
-              </span>
+          <div className="w-full flex justify-between items-center">
+            <div className="w-full flex items-center gap-2">
+              <Image
+                width={24}
+                height={24}
+                src="me.png"
+                alt="coin icon"
+                loader={imageLoader}
+              />
+              <div className="flex flex-col">
+                <span className="text-[#334155] font-semibold text-sm mb-[-2px]">
+                  {e?.row?.name}
+                </span>
+                <span className="text-[#64748b] font-regular text-xs mt-[-2px] uppercase  ">
+                  {e?.row?.symbol}
+                </span>
+              </div>
+            </div>
+            <div className="">
+              <button
+                type="button"
+                className="border border-[#35b000] text-[#35b000] px-2 rounded-md text-xs"
+              >
+                Comprar
+              </button>
             </div>
           </div>
         )
@@ -92,17 +104,162 @@ export default function Home() {
       field: "current_price",
       headerName: "Preço",
       headerAlign: "right",
-      width: 140,
+      width: 120,
       align: "right",
       renderCell: (e: any) => (
-        <span>
+        <span className="font-extralight">
           US
-          {e?.row?.current_price?.toLocaleString("en-US", {
-            style: "currency",
-            currency: "USD",
-          })}
+          {e?.row?.current_price
+            ?.toLocaleString("en-US", {
+              style: "currency",
+              currency: "USD",
+            })
+            .replace("$", "$ ")}
         </span>
       ),
+    },
+    {
+      field: "price_change_percentage_1h_in_currency",
+      headerName: "1 h",
+      headerAlign: "right",
+      align: "right",
+      width: 70,
+      renderCell: (e: any) => {
+        const oneHourVariation = e?.row?.price_change_percentage_1h_in_currency
+        const color = checkCondition(oneHourVariation)
+        return (
+          <span
+            style={{ color: color.substring(6, 13) }}
+            className={`font-extralight`}
+          >
+            {oneHourVariation > 0 ? (
+              <FaCaretUp className="inline mb-1" size={14} />
+            ) : oneHourVariation < 0 ? (
+              <FaCaretDown className="inline mb-1" size={14} />
+            ) : (
+              <FaMinus className="inline mb-1" size={14} />
+            )}
+            {oneHourVariation.toFixed(1)}%
+          </span>
+        )
+      },
+    },
+    {
+      field: "price_change_percentage_24h_in_currency",
+      headerName: "24 h",
+      headerAlign: "right",
+      align: "right",
+      width: 75,
+      renderCell: (e: any) => {
+        const twentyFourHourVariation =
+          e?.row?.price_change_percentage_24h_in_currency
+        const color = checkCondition(twentyFourHourVariation)
+        return (
+          <span
+            style={{ color: color.substring(6, 13) }}
+            className={`font-extralight`}
+          >
+            {twentyFourHourVariation > 0 ? (
+              <FaCaretUp className="inline mb-1" size={14} />
+            ) : twentyFourHourVariation < 0 ? (
+              <FaCaretDown className="inline mb-1" size={14} />
+            ) : (
+              <FaMinus className="inline mb-1" size={14} />
+            )}
+            {twentyFourHourVariation.toFixed(1)}%
+          </span>
+        )
+      },
+    },
+    {
+      field: "price_change_percentage_7d_in_currency",
+      headerName: "7 d",
+      headerAlign: "right",
+      align: "right",
+      width: 70,
+      renderCell: (e: any) => {
+        const sevenDaysVariation =
+          e?.row?.price_change_percentage_7d_in_currency
+        const color = checkCondition(sevenDaysVariation)
+        return (
+          <span
+            style={{ color: color.substring(6, 13) }}
+            className={`font-extralight`}
+          >
+            {sevenDaysVariation > 0 ? (
+              <FaCaretUp className="inline mb-1" size={14} />
+            ) : sevenDaysVariation < 0 ? (
+              <FaCaretDown className="inline mb-1" size={14} />
+            ) : (
+              <FaMinus className="inline mb-1" size={14} />
+            )}
+            {sevenDaysVariation.toFixed(1)}%
+          </span>
+        )
+      },
+    },
+    {
+      field: "total_volume",
+      headerName: "Volume em 24 h",
+      headerAlign: "right",
+      align: "right",
+      width: 170,
+      // flex: 1,
+      renderCell: (e: any) => {
+        const totalVolume = e?.row?.total_volume
+        return (
+          <span className={`font-extralight`}>
+            US
+            {totalVolume
+              .toLocaleString("en-US", {
+                style: "currency",
+                currency: "USD",
+              })
+              .replace("$", "$ ")}
+          </span>
+        )
+      },
+    },
+    {
+      field: "market_cap",
+      headerName: "Capitalização de mercado",
+      headerAlign: "right",
+      align: "right",
+      width: 200,
+      renderCell: (e: any) => {
+        const marketCap = e?.row?.market_cap
+        return (
+          <span className={`font-extralight`}>
+            US
+            {marketCap
+              .toLocaleString("en-US", {
+                style: "currency",
+                currency: "USD",
+              })
+              .replace("$", "$ ")}
+          </span>
+        )
+      },
+    },
+    {
+      field: "image",
+      headerName: "Últimos 7 dias",
+      headerAlign: "right",
+      align: "right",
+      width: 160,
+      renderCell: (e: any) => {
+        const id = e.row.image.split("/")[5]
+        const url = `https://www.coingecko.com/coins/${id}/sparkline.svg`
+        return (
+          <Image
+            width={128}
+            height={58}
+            src={"me.png"}
+            alt="graphic"
+            loader={() => url}
+          />
+        )
+      },
     },
   ]
 
@@ -133,6 +290,7 @@ export default function Home() {
           <div className="text-xs absolute md:relative top-0 right-0">
             <span>Powered by </span>
             <a
+              target="_blank"
               href="https://www.coingecko.com/en/api"
               className="font-semibold text-[#35b000]"
             >
@@ -174,6 +332,12 @@ export default function Home() {
               },
             ".MuiDataGrid-columnSeparator": {
               display: "none",
+            },
+            ".MuiDataGrid-columnHeader": {
+              fontSize: 12,
+            },
+            ".MuiDataGrid-columnHeaderTitle": {
+              fontWeight: 700,
             },
           }}
           columnHeaderHeight={41.5}

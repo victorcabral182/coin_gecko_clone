@@ -1,5 +1,4 @@
 import axios from "axios"
-import cache from "memory-cache"
 
 interface IGetCoinsPagedParams {
   ids?: string[]
@@ -14,7 +13,15 @@ interface IGetCoinsPagedParams {
   per_page?: number
   page?: number
   sparkline?: boolean
-  price_change_percentage?: "1h" | "24h" | "7d" | "14d" | "30d" | "200d" | "1y"
+  price_change_percentage?:
+    | string
+    | "1h"
+    | "24h"
+    | "7d"
+    | "14d"
+    | "30d"
+    | "200d"
+    | "1y"
   locale?: "en"
 }
 
