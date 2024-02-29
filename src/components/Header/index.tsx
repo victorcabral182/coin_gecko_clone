@@ -1,16 +1,25 @@
 "use client"
 
-import { AiFillStar } from "react-icons/ai"
 import Image from "next/image"
-import { AiOutlineMenu } from "react-icons/ai"
 import logoHeader from "../../assets/img/coingecko.svg"
 import { Button3D } from "../Button3D"
+import { Dropdown } from "../Dropdown"
+import { AiFillStar } from "react-icons/ai"
+import { AiOutlineMenu } from "react-icons/ai"
+import { SearchInputBox } from "../SearchInputBox"
 import { CapitalizationRow } from "../CapitalizationRow"
 import { useGeneralContext } from "@/contexts/generalContext/GeneralContext"
-import { SearchInputBox } from "../SearchInputBox"
+import { criptoCurrencies } from "../../constants/dropdown-menu"
+import { useReducer } from "react"
 
 export const Header = () => {
   const { globalData } = useGeneralContext()
+
+  const [isOpenCripto, switchMenu1] = useReducer(
+    (isOpenCripto) => !isOpenCripto,
+    false
+  )
+
   return (
     <>
       <div className="hidden xl:flex">
@@ -38,11 +47,26 @@ export const Header = () => {
               className="w-[9rem] h-[40px]"
             />
             <div className="flex gap-8 font-semibold text-sm text-[#334155]">
-              <span className="cursor-pointer">Criptomoedas</span>
-              <span className="cursor-pointer">Câmbios</span>
-              <span className="cursor-pointer">NFT</span>
-              <span className="cursor-pointer">Informação</span>
-              <span className="cursor-pointer">Produtos</span>
+              <div
+                className="relative"
+                onMouseEnter={switchMenu1}
+                onMouseLeave={switchMenu1}
+              >
+                <span className="cursor-pointer hover:text-[#4bcc00]">
+                  Criptomoedas
+                </span>
+                <Dropdown isOpen={isOpenCripto} options={criptoCurrencies} />
+              </div>
+              <span className="cursor-pointer hover:text-[#4bcc00]">
+                Câmbios
+              </span>
+              <span className="cursor-pointer hover:text-[#4bcc00]">NFT</span>
+              <span className="cursor-pointer hover:text-[#4bcc00]">
+                Informação
+              </span>
+              <span className="cursor-pointer hover:text-[#4bcc00]">
+                Produtos
+              </span>
             </div>
           </div>
           <div className="flex items-center text-sm text-[#334155]">
@@ -59,7 +83,7 @@ export const Header = () => {
               <span className="text-gray-700 font-semibold">Candy</span>
             </div>
             <div className="flex gap-1 items-center ml-2 cursor-pointer">
-              <AiFillStar size={18} color="EAB39D" />
+              <AiFillStar size={18} color="#ffd11a" />
               <span className="text-gray-700 font-semibold">Carteira</span>
             </div>
             <div className="ml-3 w-[210px]">
