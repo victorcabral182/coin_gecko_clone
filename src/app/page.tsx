@@ -13,7 +13,6 @@ import { CapitalizationRow } from "@/components/CapitalizationRow"
 import { useGeneralContext } from "@/contexts/generalContext/GeneralContext"
 import { checkCondition, handleMarketCap } from "@/utils/utils"
 import { FaCaretDown, FaCaretUp, FaMinus } from "react-icons/fa"
-import { columnGroupsStateInitializer } from "@mui/x-data-grid/internals"
 
 export default function Home() {
   const { coinsMarket, globalData, setCoinsMarket, trending } =
@@ -47,7 +46,7 @@ export default function Home() {
         return (
           <div className="w-full flex justify-center items-center text-center">
             <div
-              className="w-full"
+              className="w-full cursor-pointer"
               onClick={() => handleFavorite(e.row.market_cap_rank)}
             >
               {e.row.isFavorite ? (
@@ -70,7 +69,7 @@ export default function Home() {
           return e.row.image
         }
         return (
-          <div className="w-full flex justify-between items-center">
+          <div className="w-full flex justify-between items-center cursor-pointer">
             <div className="w-full flex items-center gap-2">
               <Image
                 width={24}

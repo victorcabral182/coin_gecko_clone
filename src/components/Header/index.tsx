@@ -16,7 +16,7 @@ export const Header = () => {
       <div className="hidden xl:flex">
         <CapitalizationRow isHeader data={globalData} />
       </div>
-      <header className="flex flex-col w-full gap-2 mb-2 md:px-6 xl:px-0">
+      <header className="flex flex-col w-full gap-2 mb-2 md:px-6 xl:px-0 xl:border-y-[1px] xl:border-y-gray-400 xl:border-opacity-10 xl:mt-2">
         <div className="flex justify-between xl:hidden">
           <div className="flex items-center gap-4">
             <AiOutlineMenu size={18} />
@@ -38,15 +38,15 @@ export const Header = () => {
               className="w-[9rem] h-[40px]"
             />
             <div className="flex gap-8 text-gray-700 font-semibold">
-              <span>Criptomoedas</span>
-              <span>Câmbios</span>
-              <span>NFT</span>
-              <span>Informação</span>
-              <span>Produtos</span>
+              <span className="cursor-pointer">Criptomoedas</span>
+              <span className="cursor-pointer">Câmbios</span>
+              <span className="cursor-pointer">NFT</span>
+              <span className="cursor-pointer">Informação</span>
+              <span className="cursor-pointer">Produtos</span>
             </div>
           </div>
           <div className="flex items-center ">
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 cursor-pointer">
               <Image
                 alt="candy jar"
                 src="me.png"
@@ -58,7 +58,7 @@ export const Header = () => {
               />
               <span className="text-gray-700 font-semibold">Candy</span>
             </div>
-            <div className="flex items-center ml-2 gap-2">
+            <div className="flex gap-1 items-center ml-2 cursor-pointer">
               <AiFillStar size={18} color="EAB39D" />
               <span className="text-gray-700 font-semibold">Carteira</span>
             </div>
