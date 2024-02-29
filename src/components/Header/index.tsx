@@ -37,7 +37,7 @@ export const Header = () => {
               alt="coin gecko logo"
               className="w-[9rem] h-[40px]"
             />
-            <div className="flex gap-8 text-gray-700 font-semibold">
+            <div className="flex gap-8 font-semibold text-sm text-[#334155]">
               <span className="cursor-pointer">Criptomoedas</span>
               <span className="cursor-pointer">Câmbios</span>
               <span className="cursor-pointer">NFT</span>
@@ -45,7 +45,7 @@ export const Header = () => {
               <span className="cursor-pointer">Produtos</span>
             </div>
           </div>
-          <div className="flex items-center ">
+          <div className="flex items-center text-sm text-[#334155]">
             <div className="flex items-center gap-2 cursor-pointer">
               <Image
                 alt="candy jar"

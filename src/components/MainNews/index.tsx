@@ -42,7 +42,7 @@ export const MainNews = ({ data }: IMainNews) => {
       </span>
       <span
         onClick={showOrHide}
-        className="cursor-pointer text-xs md:text-sm underline text-slate-700 font-semibold"
+        className="cursor-pointer text-xs md:text-sm underline text-slate-700 font-semibold hover:text-[#00a83e] active:text-[#34e776]"
       >
         {mainNews ? "Ocultar" : "Ler mais"}
       </span>

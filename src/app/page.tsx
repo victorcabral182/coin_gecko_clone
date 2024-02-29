@@ -251,8 +251,8 @@ export default function Home() {
         const url = `https://www.coingecko.com/coins/${id}/sparkline.svg`
         return (
           <Image
-            width={128}
-            height={58}
+            width={135}
+            height={50}
             src={"me.png"}
             alt="graphic"
             loader={() => url}

@@ -42,6 +42,7 @@ export const GeneralContextProvider = ({ children }) => {
       })
       return response
     } catch (err) {
+      alert("Ocorreu um erro: " + err.message)
       console.error(err)
     }
   }

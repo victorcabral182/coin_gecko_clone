@@ -181,6 +181,7 @@ export const Footer = () => {
               height={45}
               src="me.png"
               alt="Google Play"
+              className="w-[135px] h-[45px]"
               loader={() =>
                 "https://static.coingecko.com/s/coingecko_logos/google_play_store-cb1f298b04afa7f74639a948d9b2e22e4aa6eea9486a2b0442c2cf9bdcda63e8.svg"
               }
@@ -189,7 +190,8 @@ export const Footer = () => {
               width={135}
               height={45}
               src="me.png"
-              alt="Google Play"
+              alt="App Store"
+              className="w-[135px] h-[45px]"
               loader={() =>
                 "https://static.coingecko.com/s/coingecko_logos/apple_app_store-558245a688cc13737dfb861fd82b252d75d5afbaf343c06e3067a454675bbe05.svg"
               }
