@@ -22,7 +22,7 @@ export const CapitalizationRow = ({
       <div className="flex whitespace-nowrap gap-2 xl:gap-3 max-w-full xl:w-full overflow-x-scroll xl:overflow-x-hidden md:px-6 py-2 border-y xl:border-y-0 mt-2 xl:mt-0">
         <div>
           <span className="hidden xl:inline text-xs text-[#64748b]">
-            Moedas{" "}
+            Moedas:{" "}
           </span>
           <span className="hidden xl:inline text-xs text-[#334155] font-semibold">
             {data?.active_cryptocurrencies}{" "}
@@ -30,7 +30,7 @@ export const CapitalizationRow = ({
         </div>
         <div>
           <span className="hidden xl:inline text-xs text-[#64748b]">
-            Câmbio{" "}
+            Câmbio:{" "}
           </span>
           <span className="hidden xl:inline text-xs text-[#334155] font-semibold">
             {data?.markets}{" "}

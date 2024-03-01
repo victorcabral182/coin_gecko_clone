@@ -9,8 +9,12 @@ import { AiOutlineMenu } from "react-icons/ai"
 import { SearchInputBox } from "../SearchInputBox"
 import { CapitalizationRow } from "../CapitalizationRow"
 import { useGeneralContext } from "@/contexts/generalContext/GeneralContext"
-import { criptoCurrencies } from "../../constants/dropdown-menu"
 import { useReducer } from "react"
+import {
+  Nft,
+  criptoCurrencies,
+  currencyExchange,
+} from "@/constants/dropdown-menu"
 
 export const Header = () => {
   const { globalData } = useGeneralContext()
@@ -19,6 +23,11 @@ export const Header = () => {
     (isOpenCripto) => !isOpenCripto,
     false
   )
+  const [isOpenExchange, switchMenu2] = useReducer(
+    (isOpenExchange) => !isOpenExchange,
+    false
+  )
+  const [isOpenNft, switchMenu3] = useReducer((isOpenNft) => !isOpenNft, false)
 
   return (
     <>
@@ -57,10 +66,24 @@ export const Header = () => {
                 </span>
                 <Dropdown isOpen={isOpenCripto} options={criptoCurrencies} />
               </div>
-              <span className="cursor-pointer hover:text-[#4bcc00]">
-                Câmbios
-              </span>
-              <span className="cursor-pointer hover:text-[#4bcc00]">NFT</span>
+              <div
+                className="relative"
+                onMouseEnter={switchMenu2}
+                onMouseLeave={switchMenu2}
+              >
+                <span className="cursor-pointer hover:text-[#4bcc00]">
+                  Câmbios
+                </span>
+                <Dropdown isOpen={isOpenExchange} options={currencyExchange} />
+              </div>
+              <div
+                className="relative"
+                onMouseEnter={switchMenu3}
+                onMouseLeave={switchMenu3}
+              >
+                <span className="cursor-pointer hover:text-[#4bcc00]">NFT</span>
+                <Dropdown isOpen={isOpenNft} options={Nft} />
+              </div>
               <span className="cursor-pointer hover:text-[#4bcc00]">
                 Informação
               </span>
