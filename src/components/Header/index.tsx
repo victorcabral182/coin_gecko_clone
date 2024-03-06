@@ -11,9 +11,11 @@ import { CapitalizationRow } from "../CapitalizationRow"
 import { useGeneralContext } from "@/contexts/generalContext/GeneralContext"
 import { useReducer } from "react"
 import {
-  Nft,
   criptoCurrencies,
   currencyExchange,
+  information,
+  nft,
+  products,
 } from "@/constants/dropdown-menu"
 
 export const Header = () => {
@@ -28,6 +30,14 @@ export const Header = () => {
     false
   )
   const [isOpenNft, switchMenu3] = useReducer((isOpenNft) => !isOpenNft, false)
+  const [isOpenInformation, switchMenu4] = useReducer(
+    (isOpenInformation) => !isOpenInformation,
+    false
+  )
+  const [isOpenProducts, switchMenu5] = useReducer(
+    (isOpenProducts) => !isOpenProducts,
+    false
+  )
 
   return (
     <>
@@ -61,7 +71,11 @@ export const Header = () => {
                 onMouseEnter={switchMenu1}
                 onMouseLeave={switchMenu1}
               >
-                <span className="cursor-pointer hover:text-[#4bcc00]">
+                <span
+                  className={`cursor-pointer hover:text-[#4bcc00] ${
+                    isOpenCripto && "text-[#4bcc00]"
+                  } `}
+                >
                   Criptomoedas
                 </span>
                 <Dropdown isOpen={isOpenCripto} options={criptoCurrencies} />
@@ -71,7 +85,11 @@ export const Header = () => {
                 onMouseEnter={switchMenu2}
                 onMouseLeave={switchMenu2}
               >
-                <span className="cursor-pointer hover:text-[#4bcc00]">
+                <span
+                  className={`cursor-pointer hover:text-[#4bcc00] ${
+                    isOpenExchange && "text-[#4bcc00]"
+                  }`}
+                >
                   Câmbios
                 </span>
                 <Dropdown isOpen={isOpenExchange} options={currencyExchange} />
@@ -81,15 +99,43 @@ export const Header = () => {
                 onMouseEnter={switchMenu3}
                 onMouseLeave={switchMenu3}
               >
-                <span className="cursor-pointer hover:text-[#4bcc00]">NFT</span>
-                <Dropdown isOpen={isOpenNft} options={Nft} />
+                <span
+                  className={`cursor-pointer hover:text-[#4bcc00] ${
+                    isOpenNft && "text-[#4bcc00]"
+                  }`}
+                >
+                  NFT
+                </span>
+                <Dropdown isOpen={isOpenNft} options={nft} />
               </div>
-              <span className="cursor-pointer hover:text-[#4bcc00]">
-                Informação
-              </span>
-              <span className="cursor-pointer hover:text-[#4bcc00]">
-                Produtos
-              </span>
+              <div
+                className="relative"
+                onMouseEnter={switchMenu4}
+                onMouseLeave={switchMenu4}
+              >
+                <span
+                  className={`cursor-pointer hover:text-[#4bcc00] ${
+                    isOpenInformation && "text-[#4bcc00]"
+                  }`}
+                >
+                  Informação
+                </span>
+                <Dropdown isOpen={isOpenInformation} options={information} />
+              </div>
+              <div
+                className="relative"
+                onMouseEnter={switchMenu5}
+                onMouseLeave={switchMenu5}
+              >
+                <span
+                  className={`cursor-pointer hover:text-[#4bcc00] ${
+                    isOpenProducts && "text-[#4bcc00]"
+                  }`}
+                >
+                  Produtos
+                </span>
+                <Dropdown isOpen={isOpenProducts} options={products} />
+              </div>
             </div>
           </div>
           <div className="flex items-center text-sm text-[#334155]">

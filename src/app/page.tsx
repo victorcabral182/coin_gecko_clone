@@ -44,7 +44,7 @@ export default function Home() {
           })
         }
         return (
-          <div className="w-full flex justify-center items-center text-center">
+          <div className="sticky w-full flex justify-center items-center text-center">
             <div
               className="w-full cursor-pointer"
               onClick={() => handleFavorite(e.row.market_cap_rank)}
@@ -63,13 +63,13 @@ export default function Home() {
     {
       field: "name",
       headerName: "Moeda",
-      flex: 1,
+      width: 260,
       renderCell: (e) => {
         const imageLoader = () => {
           return e.row.image
         }
         return (
-          <div className="w-full flex justify-between items-center cursor-pointer">
+          <div className="sticky w-full flex justify-between items-center cursor-pointer">
             <div className="w-full flex items-center gap-2">
               <Image
                 width={24}

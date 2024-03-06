@@ -29,7 +29,7 @@ export const Dropdown = ({ options, isOpen }: IDropDown) => {
                 return (
                   <div
                     key={item.description}
-                    className="flex items-center gap-2 rounded-lg py-2 px-2 text-[#64748b] text-xs"
+                    className="flex items-center gap-2 rounded-lg py-2 px-2 text-[#64748b] text-xs whitespace-nowrap"
                   >
                     {item?.description}
                     <hr className="w-full opacity-60" />

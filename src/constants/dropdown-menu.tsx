@@ -1,6 +1,16 @@
+import { AiFillGift } from "react-icons/ai"
+import { FaCrown } from "react-icons/fa"
+import { GoDeviceMobile } from "react-icons/go"
+import { AiFillStar } from "react-icons/ai"
+import { HiMail } from "react-icons/hi"
+import { BsFillMicFill } from "react-icons/bs"
+import { AiFillYoutube } from "react-icons/ai"
+import { BiBarChart } from "react-icons/bi"
+import { FaNewspaper } from "react-icons/fa"
+import { HiLightBulb } from "react-icons/hi"
+import { GiOpenBook } from "react-icons/gi"
 import { GiNestedHexagons } from "react-icons/gi"
 import { AiOutlineFileImage } from "react-icons/ai"
-import { AiFillStar } from "react-icons/ai"
 import { BiBuilding } from "react-icons/bi"
 import { AiOutlineLineChart } from "react-icons/ai"
 import { AiFillPieChart } from "react-icons/ai"
@@ -95,7 +105,7 @@ export const currencyExchange = [
   },
 ]
 
-export const Nft = [
+export const nft = [
   {
     href: "#",
     description: "Preço de Entrada de NFT",
@@ -104,7 +114,7 @@ export const Nft = [
   },
   {
     href: "#",
-    description: "Moedas relacionadas om NFT",
+    description: "Moedas relacionadas com NFT",
     icon: <GiNestedHexagons className="text-gray-400" size={18} />,
     divider: false,
   },
@@ -112,6 +122,101 @@ export const Nft = [
     href: "#",
     description: "Watchlist NFT",
     icon: <AiFillStar className="text-gray-400" size={18} />,
+    divider: false,
+  },
+]
+
+export const information = [
+  {
+    href: "#",
+    description: "Aprenda Cripto",
+    icon: <GiOpenBook className="text-gray-400" size={18} />,
+    divider: false,
+  },
+  {
+    href: "#",
+    description: "Insights da Pesquisa",
+    icon: <HiLightBulb className="text-gray-400" size={18} />,
+    divider: false,
+  },
+  {
+    href: "#",
+    description: "Notícias",
+    icon: <FaNewspaper className="text-gray-400" size={18} />,
+    divider: false,
+  },
+  {
+    href: "#",
+    description: "Relatórios",
+    icon: <BiBarChart className="text-gray-400" size={18} />,
+    divider: false,
+  },
+  {
+    href: "#",
+    description: "Vídeos",
+    icon: <AiFillYoutube className="text-gray-400" size={18} />,
+    divider: false,
+  },
+  {
+    href: "#",
+    description: "PodCast",
+    icon: <BsFillMicFill className="text-gray-400" size={18} />,
+    divider: false,
+  },
+  {
+    href: "#",
+    description: "Newsletter",
+    icon: <HiMail className="text-gray-400" size={18} />,
+    divider: false,
+  },
+]
+
+export const products = [
+  {
+    href: "#",
+    description: "Portfolio de Cripto",
+    icon: <AiFillStar className="text-gray-400" size={18} />,
+    divider: false,
+  },
+  {
+    href: "#",
+    description: "Aplicativo CoinGecko",
+    icon: <GoDeviceMobile className="text-gray-400" size={18} />,
+    divider: false,
+  },
+  {
+    href: "#",
+    description: "CoinGecko Premium",
+    icon: <FaCrown className="text-gray-400" size={18} />,
+    divider: false,
+  },
+  {
+    href: "#",
+    description: "Loja CoinGecko",
+    icon: <AiFillGift className="text-gray-400" size={18} />,
+    divider: false,
+  },
+  {
+    description: "Para desenvolvedores",
+    divider: true,
+  },
+  {
+    href: "#",
+    description: "API de criptomoedas",
+    divider: false,
+  },
+  {
+    href: "#",
+    description: "Widget de Cripto",
+    divider: false,
+  },
+  {
+    description: "On-chain",
+    divider: true,
+  },
+  {
+    href: "#",
+    description: "GeckoTerminal",
     divider: false,
   },
 ]
