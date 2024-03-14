@@ -125,7 +125,6 @@ export const useCoinGeckoService = () => {
     const response = await API.get<any[]>(`/coins/${id}?sparkline=true`)
     localStorage.setItem(id, JSON.stringify(response.data))
     localStorage.setItem(`${id}LastUpdated`, new Date().getTime().toString())
-    console.log(response)
     return response.data
   }
 
