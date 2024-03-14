@@ -13,6 +13,7 @@ import { CapitalizationRow } from "@/components/CapitalizationRow"
 import { useGeneralContext } from "@/contexts/generalContext/GeneralContext"
 import { checkCondition, handleMarketCap } from "@/utils/utils"
 import { FaCaretDown, FaCaretUp, FaMinus } from "react-icons/fa"
+import Link from "next/link"
 
 export default function Home() {
   const { coinsMarket, globalData, setCoinsMarket, trending } =
@@ -69,7 +70,10 @@ export default function Home() {
           return e.row.image
         }
         return (
-          <div className="sticky w-full flex justify-between items-center cursor-pointer">
+          <Link
+            href={`coin/${e.row.id}`}
+            className="sticky w-full flex justify-between items-center cursor-pointer"
+          >
             <div className="w-full flex items-center gap-2">
               <Image
                 width={24}
@@ -95,7 +99,7 @@ export default function Home() {
                 Comprar
               </button>
             </div>
-          </div>
+          </Link>
         )
       },
     },

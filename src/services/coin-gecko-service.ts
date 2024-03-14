@@ -109,6 +109,26 @@ export const useCoinGeckoService = () => {
     return response.data
   }
 
+  const getCoinDataById = async (id: string) => {
+    let cachedData = localStorage.getItem(id)
+    let lastUpdatedTime = localStorage.getItem(`${id}LastUpdated`)
+    if (cachedData && lastUpdatedTime) {
+      const currentTime = new Date().getTime()
+      const timeDifference = currentTime - parseInt(lastUpdatedTime)
+      if (timeDifference <= 60000) {
+        return JSON.parse(cachedData)
+      } else {
+        localStorage.removeItem(id)
+        localStorage.removeItem(`${id}LastUpdated`)
+      }
+    }
+    const response = await API.get<any[]>(`/coins/${id}?sparkline=true`)
+    localStorage.setItem(id, JSON.stringify(response.data))
+    localStorage.setItem(`${id}LastUpdated`, new Date().getTime().toString())
+    console.log(response)
+    return response.data
+  }
+
   const getGlobalData = async (): Promise<IMarketData> => {
     let cache = localStorage.getItem("globalData")
     let lastUpdatedTime = localStorage.getItem("globalDataLastUpdated")
@@ -150,5 +170,11 @@ export const useCoinGeckoService = () => {
     return response
   }
 
-  return { checkApiStatus, getCoinsPaged, getGlobalData, getTrending }
+  return {
+    checkApiStatus,
+    getCoinsPaged,
+    getGlobalData,
+    getTrending,
+    getCoinDataById,
+  }
 }
