@@ -61,8 +61,6 @@ export default function CoinPage({ params }: { params: { id: string } }) {
     }
   )
 
-  console.log(sparkline)
-
   const handleLinearProgressValue = () => {
     let min = data?.market_data?.low_24h?.usd
     let max = data?.market_data?.high_24h?.usd
@@ -74,8 +72,6 @@ export default function CoinPage({ params }: { params: { id: string } }) {
       return null
     }
   }
-
-  console.log()
 
   return (
     <main className="flex flex-col">
@@ -157,33 +153,189 @@ export default function CoinPage({ params }: { params: { id: string } }) {
           </Button3D>
           <div style={{ height: "400px" }}>
             <ResponsiveLine
-              data={[{ id: "coin", data: sparkline ?? [] }]}
-              margin={{ top: 50, right: 46, bottom: 50, left: 0 }}
+              data={[{ id: data?.name, data: sparkline ?? [] }]}
+              enableSlices="x"
+              yFormat=" >-$,.2f"
+              useMesh={true}
+              enableArea={true}
+              enableGridX={false}
+              isInteractive={true}
+              enablePoints={false}
+              enableTouchCrosshair={true}
               axisLeft={null}
               axisBottom={null}
-              axisRight={{}}
+              margin={{ top: 0, right: 50, bottom: 0, left: 0 }}
+              axisRight={{
+                tickPadding: 10,
+              }}
+              crosshairType="cross"
               xScale={{ type: "linear" }}
               yScale={{
                 type: "linear",
                 stacked: true,
                 min:
                   data &&
-                  Math.min(...data?.market_data?.sparkline_7d?.price) * 0.995,
+                  Math.min(...data?.market_data?.sparkline_7d?.price) * 0.99,
                 max:
                   data &&
-                  Math.max(...data?.market_data?.sparkline_7d?.price) * 1.005,
+                  Math.max(...data?.market_data?.sparkline_7d?.price) * 1.01,
               }}
-              yFormat=" >-.2f"
-              pointSize={0}
-              pointColor={{ theme: "background" }}
-              pointBorderWidth={2}
-              pointBorderColor={{ from: "serieColor" }}
-              pointLabelYOffset={-12}
-              enableTouchCrosshair={true}
             />
+          </div>
+          <div className="flex flex-col items-center border border-gray-200 rounded-lg">
+            <div className="w-full grid grid-cols-6 bg-[#F1f5F9] font-semibold">
+              <span className="text-center py-3 px-3 text-[12px] text-[#0f172a]">
+                24h
+              </span>
+              <span className="text-center py-3 px-3 text-[12px] text-[#0f172a]">
+                7d
+              </span>
+              <span className="text-center py-3 px-3 text-[12px] text-[#0f172a]">
+                14d
+              </span>
+              <span className="text-center py-3 px-3 text-[12px] text-[#0f172a]">
+                30d
+              </span>
+              <span className="text-center py-3 px-3 text-[12px] text-[#0f172a]">
+                60d
+              </span>
+              <span className="text-center py-3 px-3 text-[12px] text-[#0f172a]">
+                1y
+              </span>
+            </div>
+            <div className="w-full grid grid-cols-6">
+              <span
+                style={{
+                  color: checkCondition(
+                    data?.market_data?.price_change_percentage_24h
+                  )
+                    .replace("text-[", "")
+                    .replace("]", ""),
+                }}
+                className="flex items-center text-center py-3 px-2 text-[11px] text-[#0f172a]"
+              >
+                {data?.market_data?.price_change_percentage_24h > 0 ? (
+                  <FaCaretUp className="inline " size={13} />
+                ) : data?.market_data?.price_change_percentage_24h < 0 ? (
+                  <FaCaretDown className="inline " size={13} />
+                ) : (
+                  <FaMinus className="inline " size={13} />
+                )}
+                {data?.market_data?.price_change_percentage_24h.toFixed(2)}%
+              </span>
+              <span
+                style={{
+                  color: checkCondition(
+                    data?.market_data?.price_change_percentage_7d
+                  )
+                    .replace("text-[", "")
+                    .replace("]", ""),
+                }}
+                className="flex items-center text-center py-3 text-[11px] text-[#0f172a]"
+              >
+                {data?.market_data?.price_change_percentage_7d > 0 ? (
+                  <FaCaretUp className="inline " size={13} />
+                ) : data?.market_data?.price_change_percentage_7d < 0 ? (
+                  <FaCaretDown className="inline " size={13} />
+                ) : (
+                  <FaMinus className="inline " size={13} />
+                )}
+                {data?.market_data?.price_change_percentage_7d.toFixed(2)}%
+              </span>
+              <span
+                style={{
+                  color: checkCondition(
+                    data?.market_data?.price_change_percentage_14d
+                  )
+                    .replace("text-[", "")
+                    .replace("]", ""),
+                }}
+                className="flex items-center text-center py-3 text-[11px] text-[#0f172a]"
+              >
+                {data?.market_data?.price_change_percentage_14d > 0 ? (
+                  <FaCaretUp className="inline " size={13} />
+                ) : data?.market_data?.price_change_percentage_14d < 0 ? (
+                  <FaCaretDown className="inline " size={13} />
+                ) : (
+                  <FaMinus className="inline " size={13} />
+                )}
+                {data?.market_data?.price_change_percentage_14d.toFixed(2)}%
+              </span>
+              <span
+                style={{
+                  color: checkCondition(
+                    data?.market_data?.price_change_percentage_30d
+                  )
+                    .replace("text-[", "")
+                    .replace("]", ""),
+                }}
+                className="flex items-center text-center py-3 text-[11px] text-[#0f172a]"
+              >
+                {data?.market_data?.price_change_percentage_30d > 0 ? (
+                  <FaCaretUp className="inline " size={13} />
+                ) : data?.market_data?.price_change_percentage_30d < 0 ? (
+                  <FaCaretDown className="inline " size={13} />
+                ) : (
+                  <FaMinus className="inline " size={13} />
+                )}
+                {data?.market_data?.price_change_percentage_30d.toFixed(2)}%
+              </span>
+              <span
+                style={{
+                  color: checkCondition(
+                    data?.market_data?.price_change_percentage_60d
+                  )
+                    .replace("text-[", "")
+                    .replace("]", ""),
+                }}
+                className="flex items-center text-center py-3 text-[11px] text-[#0f172a]"
+              >
+                {data?.market_data?.price_change_percentage_60d > 0 ? (
+                  <FaCaretUp className="inline " size={13} />
+                ) : data?.market_data?.price_change_percentage_60d < 0 ? (
+                  <FaCaretDown className="inline " size={13} />
+                ) : (
+                  <FaMinus className="inline " size={13} />
+                )}
+                {data?.market_data?.price_change_percentage_60d.toFixed(2)}%
+              </span>
+              <span
+                style={{
+                  color: checkCondition(
+                    data?.market_data?.price_change_percentage_1y
+                  )
+                    .replace("text-[", "")
+                    .replace("]", ""),
+                }}
+                className="flex items-center text-center py-3 text-[11px] text-[#0f172a]"
+              >
+                {data?.market_data?.price_change_percentage_1y > 0 ? (
+                  <FaCaretUp className="inline " size={13} />
+                ) : data?.market_data?.price_change_percentage_1y < 0 ? (
+                  <FaCaretDown className="inline " size={13} />
+                ) : (
+                  <FaMinus className="inline " size={13} />
+                )}
+                {data?.market_data?.price_change_percentage_1y.toFixed(2)}%
+              </span>
+            </div>
           </div>
         </div>
       </section>
     </main>
   )
 }
+
+// price_change_percentage_24h: 4.73211,
+
+// price_change_percentage_7d: -0.12807,
+
+// price_change_percentage_14d: 8.96899,
+
+// price_change_percentage_30d: 31.49927,
+
+// price_change_percentage_60d: 60.14818,
+
+// price_change_percentage_200d: 150.93544,
+
+// price_change_percentage_1y: 146.48771,
