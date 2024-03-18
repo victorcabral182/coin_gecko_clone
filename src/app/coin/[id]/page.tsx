@@ -73,6 +73,8 @@ export default function CoinPage({ params }: { params: { id: string } }) {
     }
   }
 
+  console.log(data?.market_data)
+
   return (
     <main className="flex flex-col">
       <div className="flex xl:hidden">
@@ -212,7 +214,7 @@ export default function CoinPage({ params }: { params: { id: string } }) {
                     .replace("text-[", "")
                     .replace("]", ""),
                 }}
-                className="flex items-center text-center py-3 px-2 text-[11px] text-[#0f172a]"
+                className="flex items-center text-center py-3 px-2 text-[12px] text-[#0f172a]"
               >
                 {data?.market_data?.price_change_percentage_24h > 0 ? (
                   <FaCaretUp className="inline " size={13} />
@@ -221,7 +223,7 @@ export default function CoinPage({ params }: { params: { id: string } }) {
                 ) : (
                   <FaMinus className="inline " size={13} />
                 )}
-                {data?.market_data?.price_change_percentage_24h.toFixed(2)}%
+                {data?.market_data?.price_change_percentage_24h.toFixed(1)}%
               </span>
               <span
                 style={{
@@ -231,7 +233,7 @@ export default function CoinPage({ params }: { params: { id: string } }) {
                     .replace("text-[", "")
                     .replace("]", ""),
                 }}
-                className="flex items-center text-center py-3 text-[11px] text-[#0f172a]"
+                className="flex items-center text-center py-3 text-[12px] text-[#0f172a]"
               >
                 {data?.market_data?.price_change_percentage_7d > 0 ? (
                   <FaCaretUp className="inline " size={13} />
@@ -240,7 +242,7 @@ export default function CoinPage({ params }: { params: { id: string } }) {
                 ) : (
                   <FaMinus className="inline " size={13} />
                 )}
-                {data?.market_data?.price_change_percentage_7d.toFixed(2)}%
+                {data?.market_data?.price_change_percentage_7d.toFixed(1)}%
               </span>
               <span
                 style={{
@@ -250,7 +252,7 @@ export default function CoinPage({ params }: { params: { id: string } }) {
                     .replace("text-[", "")
                     .replace("]", ""),
                 }}
-                className="flex items-center text-center py-3 text-[11px] text-[#0f172a]"
+                className="flex items-center text-center py-3 text-[12px] text-[#0f172a]"
               >
                 {data?.market_data?.price_change_percentage_14d > 0 ? (
                   <FaCaretUp className="inline " size={13} />
@@ -259,7 +261,7 @@ export default function CoinPage({ params }: { params: { id: string } }) {
                 ) : (
                   <FaMinus className="inline " size={13} />
                 )}
-                {data?.market_data?.price_change_percentage_14d.toFixed(2)}%
+                {data?.market_data?.price_change_percentage_14d.toFixed(1)}%
               </span>
               <span
                 style={{
@@ -269,7 +271,7 @@ export default function CoinPage({ params }: { params: { id: string } }) {
                     .replace("text-[", "")
                     .replace("]", ""),
                 }}
-                className="flex items-center text-center py-3 text-[11px] text-[#0f172a]"
+                className="flex items-center text-center py-3 text-[12px] text-[#0f172a]"
               >
                 {data?.market_data?.price_change_percentage_30d > 0 ? (
                   <FaCaretUp className="inline " size={13} />
@@ -278,7 +280,7 @@ export default function CoinPage({ params }: { params: { id: string } }) {
                 ) : (
                   <FaMinus className="inline " size={13} />
                 )}
-                {data?.market_data?.price_change_percentage_30d.toFixed(2)}%
+                {data?.market_data?.price_change_percentage_30d.toFixed(1)}%
               </span>
               <span
                 style={{
@@ -288,7 +290,7 @@ export default function CoinPage({ params }: { params: { id: string } }) {
                     .replace("text-[", "")
                     .replace("]", ""),
                 }}
-                className="flex items-center text-center py-3 text-[11px] text-[#0f172a]"
+                className="flex items-center text-center py-3 text-[12px] text-[#0f172a]"
               >
                 {data?.market_data?.price_change_percentage_60d > 0 ? (
                   <FaCaretUp className="inline " size={13} />
@@ -297,7 +299,7 @@ export default function CoinPage({ params }: { params: { id: string } }) {
                 ) : (
                   <FaMinus className="inline " size={13} />
                 )}
-                {data?.market_data?.price_change_percentage_60d.toFixed(2)}%
+                {data?.market_data?.price_change_percentage_60d.toFixed(1)}%
               </span>
               <span
                 style={{
@@ -307,7 +309,7 @@ export default function CoinPage({ params }: { params: { id: string } }) {
                     .replace("text-[", "")
                     .replace("]", ""),
                 }}
-                className="flex items-center text-center py-3 text-[11px] text-[#0f172a]"
+                className="flex items-center text-center py-3 text-[12px] text-[#0f172a]"
               >
                 {data?.market_data?.price_change_percentage_1y > 0 ? (
                   <FaCaretUp className="inline " size={13} />
@@ -316,7 +318,75 @@ export default function CoinPage({ params }: { params: { id: string } }) {
                 ) : (
                   <FaMinus className="inline " size={13} />
                 )}
-                {data?.market_data?.price_change_percentage_1y.toFixed(2)}%
+                {data?.market_data?.price_change_percentage_1y.toFixed(1)}%
+              </span>
+            </div>
+          </div>
+          <div className="w-full flex flex-col my-4 gap-5">
+            <div className="flex justify-between w-full">
+              <span className="text-[#64748B] font-medium text-[14px]">
+                Capitalização de mercado
+              </span>
+              <span className="text-[#0f172a] font-medium text-[14px]">
+                US
+                {data?.market_data?.market_cap?.usd?.toLocaleString("en-US", {
+                  style: "currency",
+                  currency: "USD",
+                })}
+              </span>
+            </div>
+            <div className="flex justify-between w-full">
+              <span className="text-[#64748B] font-medium text-[14px]">
+                Avaliação totalmente diluída
+              </span>
+              <span className="text-[#0f172a] font-medium text-[14px]">
+                US
+                {data?.market_data?.fully_diluted_valuation?.usd?.toLocaleString(
+                  "en-US",
+                  {
+                    style: "currency",
+                    currency: "USD",
+                  }
+                )}
+              </span>
+            </div>
+            <div className="flex justify-between w-full">
+              <span className="text-[#64748B] font-medium text-[14px]">
+                Volume de negociação de 24h
+              </span>
+              <span className="text-[#0f172a] font-medium text-[14px]">
+                US
+                {data?.market_data?.fully_diluted_valuation?.usd?.toLocaleString(
+                  "en-US",
+                  {
+                    style: "currency",
+                    currency: "USD",
+                  }
+                )}
+              </span>
+            </div>
+            <div className="flex justify-between w-full">
+              <span className="text-[#64748B] font-medium text-[14px]">
+                Fornecimento circulante
+              </span>
+              <span className="text-[#0f172a] font-medium text-[14px]">
+                {data?.market_data?.circulating_supply?.toLocaleString()}
+              </span>
+            </div>
+            <div className="flex justify-between w-full">
+              <span className="text-[#64748B] font-medium text-[14px]">
+                Fornecimento total
+              </span>
+              <span className="text-[#0f172a] font-medium text-[14px]">
+                {data?.market_data?.total_supply?.toLocaleString()}
+              </span>
+            </div>
+            <div className="flex justify-between w-full">
+              <span className="text-[#64748B] font-medium text-[14px]">
+                Fornecimento máx
+              </span>
+              <span className="text-[#0f172a] font-medium text-[14px]">
+                {data?.market_data?.max_supply?.toLocaleString()}
               </span>
             </div>
           </div>
@@ -325,17 +395,3 @@ export default function CoinPage({ params }: { params: { id: string } }) {
     </main>
   )
 }
-
-// price_change_percentage_24h: 4.73211,
-
-// price_change_percentage_7d: -0.12807,
-
-// price_change_percentage_14d: 8.96899,
-
-// price_change_percentage_30d: 31.49927,
-
-// price_change_percentage_60d: 60.14818,
-
-// price_change_percentage_200d: 150.93544,
-
-// price_change_percentage_1y: 146.48771,

@@ -44,6 +44,11 @@ export const CapitalizationRow = ({
             US$ {data && handleMarketCap(totalMarketCap)}
           </span>
           <span
+            style={{
+              color: checkCondition(marketCapVariation24h)
+                .replace("text-[", "")
+                .replace("]", ""),
+            }}
             className={`text-xs items-center ${checkCondition(
               marketCapVariation24h
             )} `}

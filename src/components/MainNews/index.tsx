@@ -23,6 +23,11 @@ export const MainNews = ({ data }: IMainNews) => {
         $2 biliões, uma diferença de{" "}
       </span>
       <span
+        style={{
+          color: checkCondition(marketCapVariation24h)
+            .replace("text-[", "")
+            .replace("]", ""),
+        }}
         className={`text-xs md:text-sm items-center ${checkCondition(
           marketCapVariation24h
         )} `}

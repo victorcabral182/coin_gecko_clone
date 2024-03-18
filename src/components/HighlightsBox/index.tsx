@@ -36,9 +36,12 @@ export const HighlightsBox = ({
               </span>
               {variation && (
                 <span
-                  className={`flex items-center text-sm ${checkCondition(
-                    variation
-                  )}  font-semibold`}
+                  style={{
+                    color: checkCondition(variation)
+                      .replace("text-[", "")
+                      .replace("]", ""),
+                  }}
+                  className={`flex items-center text-sm }  font-semibold`}
                 >
                   {variation > 0 ? (
                     <FaCaretUp className="inline" size={14} />
@@ -90,6 +93,13 @@ export const HighlightsBox = ({
                           {e?.item?.data?.price}
                         </span>
                         <span
+                          style={{
+                            color: checkCondition(
+                              e?.item?.data?.price_change_percentage_24h?.usd
+                            )
+                              .replace("text-[", "")
+                              .replace("]", ""),
+                          }}
                           className={`flex items-center text-sm ${checkCondition(
                             e?.item?.data?.price_change_percentage_24h?.usd
                           )} font-semibold`}
