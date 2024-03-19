@@ -12,6 +12,9 @@ import { useCoinGeckoService } from "@/services/coin-gecko-service"
 import LinearProgress from "@mui/material/LinearProgress"
 import { Button3D } from "@/components/Button3D"
 import { Line, ResponsiveLine } from "@nivo/line"
+import { MarketInfoCoin } from "@/components/MarketInfoCoin"
+import { SimpleTableVariation } from "@/components/SimpleTableVariation"
+import { CommunityOpinion } from "@/components/CommunityOpinion"
 
 export default function CoinPage({ params }: { params: { id: string } }) {
   const { globalData } = useGeneralContext()
@@ -72,8 +75,6 @@ export default function CoinPage({ params }: { params: { id: string } }) {
       return null
     }
   }
-
-  console.log(data?.market_data)
 
   return (
     <main className="flex flex-col">
@@ -184,212 +185,18 @@ export default function CoinPage({ params }: { params: { id: string } }) {
               }}
             />
           </div>
-          <div className="flex flex-col items-center border border-gray-200 rounded-lg">
-            <div className="w-full grid grid-cols-6 bg-[#F1f5F9] font-semibold">
-              <span className="text-center py-3 px-3 text-[12px] text-[#0f172a]">
-                24h
-              </span>
-              <span className="text-center py-3 px-3 text-[12px] text-[#0f172a]">
-                7d
-              </span>
-              <span className="text-center py-3 px-3 text-[12px] text-[#0f172a]">
-                14d
-              </span>
-              <span className="text-center py-3 px-3 text-[12px] text-[#0f172a]">
-                30d
-              </span>
-              <span className="text-center py-3 px-3 text-[12px] text-[#0f172a]">
-                60d
-              </span>
-              <span className="text-center py-3 px-3 text-[12px] text-[#0f172a]">
-                1y
-              </span>
-            </div>
-            <div className="w-full grid grid-cols-6">
-              <span
-                style={{
-                  color: checkCondition(
-                    data?.market_data?.price_change_percentage_24h
-                  )
-                    .replace("text-[", "")
-                    .replace("]", ""),
-                }}
-                className="flex items-center text-center py-3 px-2 text-[12px] text-[#0f172a]"
-              >
-                {data?.market_data?.price_change_percentage_24h > 0 ? (
-                  <FaCaretUp className="inline " size={13} />
-                ) : data?.market_data?.price_change_percentage_24h < 0 ? (
-                  <FaCaretDown className="inline " size={13} />
-                ) : (
-                  <FaMinus className="inline " size={13} />
-                )}
-                {data?.market_data?.price_change_percentage_24h.toFixed(1)}%
-              </span>
-              <span
-                style={{
-                  color: checkCondition(
-                    data?.market_data?.price_change_percentage_7d
-                  )
-                    .replace("text-[", "")
-                    .replace("]", ""),
-                }}
-                className="flex items-center text-center py-3 text-[12px] text-[#0f172a]"
-              >
-                {data?.market_data?.price_change_percentage_7d > 0 ? (
-                  <FaCaretUp className="inline " size={13} />
-                ) : data?.market_data?.price_change_percentage_7d < 0 ? (
-                  <FaCaretDown className="inline " size={13} />
-                ) : (
-                  <FaMinus className="inline " size={13} />
-                )}
-                {data?.market_data?.price_change_percentage_7d.toFixed(1)}%
-              </span>
-              <span
-                style={{
-                  color: checkCondition(
-                    data?.market_data?.price_change_percentage_14d
-                  )
-                    .replace("text-[", "")
-                    .replace("]", ""),
-                }}
-                className="flex items-center text-center py-3 text-[12px] text-[#0f172a]"
-              >
-                {data?.market_data?.price_change_percentage_14d > 0 ? (
-                  <FaCaretUp className="inline " size={13} />
-                ) : data?.market_data?.price_change_percentage_14d < 0 ? (
-                  <FaCaretDown className="inline " size={13} />
-                ) : (
-                  <FaMinus className="inline " size={13} />
-                )}
-                {data?.market_data?.price_change_percentage_14d.toFixed(1)}%
-              </span>
-              <span
-                style={{
-                  color: checkCondition(
-                    data?.market_data?.price_change_percentage_30d
-                  )
-                    .replace("text-[", "")
-                    .replace("]", ""),
-                }}
-                className="flex items-center text-center py-3 text-[12px] text-[#0f172a]"
-              >
-                {data?.market_data?.price_change_percentage_30d > 0 ? (
-                  <FaCaretUp className="inline " size={13} />
-                ) : data?.market_data?.price_change_percentage_30d < 0 ? (
-                  <FaCaretDown className="inline " size={13} />
-                ) : (
-                  <FaMinus className="inline " size={13} />
-                )}
-                {data?.market_data?.price_change_percentage_30d.toFixed(1)}%
-              </span>
-              <span
-                style={{
-                  color: checkCondition(
-                    data?.market_data?.price_change_percentage_60d
-                  )
-                    .replace("text-[", "")
-                    .replace("]", ""),
-                }}
-                className="flex items-center text-center py-3 text-[12px] text-[#0f172a]"
-              >
-                {data?.market_data?.price_change_percentage_60d > 0 ? (
-                  <FaCaretUp className="inline " size={13} />
-                ) : data?.market_data?.price_change_percentage_60d < 0 ? (
-                  <FaCaretDown className="inline " size={13} />
-                ) : (
-                  <FaMinus className="inline " size={13} />
-                )}
-                {data?.market_data?.price_change_percentage_60d.toFixed(1)}%
-              </span>
-              <span
-                style={{
-                  color: checkCondition(
-                    data?.market_data?.price_change_percentage_1y
-                  )
-                    .replace("text-[", "")
-                    .replace("]", ""),
-                }}
-                className="flex items-center text-center py-3 text-[12px] text-[#0f172a]"
-              >
-                {data?.market_data?.price_change_percentage_1y > 0 ? (
-                  <FaCaretUp className="inline " size={13} />
-                ) : data?.market_data?.price_change_percentage_1y < 0 ? (
-                  <FaCaretDown className="inline " size={13} />
-                ) : (
-                  <FaMinus className="inline " size={13} />
-                )}
-                {data?.market_data?.price_change_percentage_1y.toFixed(1)}%
-              </span>
-            </div>
-          </div>
-          <div className="w-full flex flex-col my-4 gap-5">
-            <div className="flex justify-between w-full">
-              <span className="text-[#64748B] font-medium text-[14px]">
-                Capitalização de mercado
-              </span>
-              <span className="text-[#0f172a] font-medium text-[14px]">
-                US
-                {data?.market_data?.market_cap?.usd?.toLocaleString("en-US", {
-                  style: "currency",
-                  currency: "USD",
-                })}
-              </span>
-            </div>
-            <div className="flex justify-between w-full">
-              <span className="text-[#64748B] font-medium text-[14px]">
-                Avaliação totalmente diluída
-              </span>
-              <span className="text-[#0f172a] font-medium text-[14px]">
-                US
-                {data?.market_data?.fully_diluted_valuation?.usd?.toLocaleString(
-                  "en-US",
-                  {
-                    style: "currency",
-                    currency: "USD",
-                  }
-                )}
-              </span>
-            </div>
-            <div className="flex justify-between w-full">
-              <span className="text-[#64748B] font-medium text-[14px]">
-                Volume de negociação de 24h
-              </span>
-              <span className="text-[#0f172a] font-medium text-[14px]">
-                US
-                {data?.market_data?.fully_diluted_valuation?.usd?.toLocaleString(
-                  "en-US",
-                  {
-                    style: "currency",
-                    currency: "USD",
-                  }
-                )}
-              </span>
-            </div>
-            <div className="flex justify-between w-full">
-              <span className="text-[#64748B] font-medium text-[14px]">
-                Fornecimento circulante
-              </span>
-              <span className="text-[#0f172a] font-medium text-[14px]">
-                {data?.market_data?.circulating_supply?.toLocaleString()}
-              </span>
-            </div>
-            <div className="flex justify-between w-full">
-              <span className="text-[#64748B] font-medium text-[14px]">
-                Fornecimento total
-              </span>
-              <span className="text-[#0f172a] font-medium text-[14px]">
-                {data?.market_data?.total_supply?.toLocaleString()}
-              </span>
-            </div>
-            <div className="flex justify-between w-full">
-              <span className="text-[#64748B] font-medium text-[14px]">
-                Fornecimento máx
-              </span>
-              <span className="text-[#0f172a] font-medium text-[14px]">
-                {data?.market_data?.max_supply?.toLocaleString()}
-              </span>
-            </div>
-          </div>
+          <SimpleTableVariation data={data} />
+          <MarketInfoCoin data={data} />
+          <CommunityOpinion data={data} />
+          <section className="flex flex-col gap-3 mt-4">
+            <span className="text-[#334155] font-bold">
+              O que é {data?.name}? ({data?.symbol.toUpperCase()})
+            </span>
+            <div
+              className="text-[12px] leading-5 text-[#64748b] text-justify"
+              dangerouslySetInnerHTML={{ __html: data?.description?.en }}
+            />
+          </section>
         </div>
       </section>
     </main>
