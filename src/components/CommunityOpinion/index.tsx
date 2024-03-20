@@ -22,7 +22,7 @@ export const CommunityOpinion = ({ data }: ICommunityOpinion) => {
     <>
       <div className="flex flex-col gap-3">
         <span className="text-[#0f172a] text-[18px] font-bold">
-          O que a comunidade acha {data?.symbol.toUpperCase()} hoje?
+          O que a comunidade acha do {data?.symbol.toUpperCase()} hoje?
         </span>
         <span className="text-[12px] text-[#64748b] font-regular">
           A comunidade está {handleSentiment()} com relação ao {data?.name} (
