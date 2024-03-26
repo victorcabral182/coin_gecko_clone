@@ -84,44 +84,44 @@ export default function CoinPage({ params }: { params: { id: string } }) {
       <div className="flex xl:hidden mb-4">
         <CapitalizationRow data={globalData} />
       </div>
-      <section className="flex flex-col gap-3">
-        <div className="flex gap-2 items-center">
-          <Image
-            alt=""
-            src="me.png"
-            width={24}
-            height={24}
-            loader={() => loadCoinImage()}
-          />
-          <span className="font-bold">{data?.name}</span>
-          <span className="text-[#64748B] text-sm">
-            {data?.symbol.toUpperCase()} Price
-          </span>
-          <span className="bg-[#f1f5f9] p-1 rounded-lg text-[12px]">
-            #{data?.market_cap_rank}
-          </span>
-        </div>
-        <div className="flex items-center">
-          <span className="text-3xl font-bold">{coinPrice}</span>
-          <span
-            className={`font-bold mt-1`}
-            style={{
-              color: checkCondition(coinVariation24h)
-                .replace("text-[", "")
-                .replace("]", ""),
-            }}
-          >
-            {coinVariation24h > 0 ? (
-              <FaCaretUp className="inline mb-1" size={20} />
-            ) : coinVariation24h < 0 ? (
-              <FaCaretDown className="inline mb-1" size={20} />
-            ) : (
-              <FaMinus className="inline mb-1" size={20} />
-            )}
-            {coinVariation24h?.toFixed(1)}%
-          </span>
-        </div>
+      <section className="flex flex-col gap-3 xl:grid xl:grid-cols-3">
         <div className="flex flex-col gap-2">
+          <div className="flex gap-2 items-center col-span-1">
+            <Image
+              alt=""
+              src="me.png"
+              width={24}
+              height={24}
+              loader={() => loadCoinImage()}
+            />
+            <span className="font-bold">{data?.name}</span>
+            <span className="text-[#64748B] text-sm">
+              {data?.symbol.toUpperCase()} Price
+            </span>
+            <span className="bg-[#f1f5f9] p-1 rounded-lg text-[12px]">
+              #{data?.market_cap_rank}
+            </span>
+          </div>
+          <div className="flex items-center col-span-1">
+            <span className="text-3xl font-bold">{coinPrice}</span>
+            <span
+              className={`font-bold mt-1`}
+              style={{
+                color: checkCondition(coinVariation24h)
+                  .replace("text-[", "")
+                  .replace("]", ""),
+              }}
+            >
+              {coinVariation24h > 0 ? (
+                <FaCaretUp className="inline mb-1" size={20} />
+              ) : coinVariation24h < 0 ? (
+                <FaCaretDown className="inline mb-1" size={20} />
+              ) : (
+                <FaMinus className="inline mb-1" size={20} />
+              )}
+              {coinVariation24h?.toFixed(1)}%
+            </span>
+          </div>
           <LinearProgress
             sx={{
               ".MuiLinearProgress-barColorPrimary": {
@@ -154,7 +154,12 @@ export default function CoinPage({ params }: { params: { id: string } }) {
               {data?.watchlist_portfolio_users?.toLocaleString()} adicionado
             </span>
           </Button3D>
-          <div style={{ height: "400px" }}>
+          <div className="hidden xl:block">
+            <MarketInfoCoin data={data} />
+          </div>
+        </div>
+        <div className="flex flex-col gap-2 col-span-2">
+          <div style={{ height: "400px" }} className="mb-4">
             <ResponsiveLine
               data={[{ id: data?.name, data: sparkline ?? [] }]}
               enableSlices="x"
@@ -186,7 +191,9 @@ export default function CoinPage({ params }: { params: { id: string } }) {
             />
           </div>
           <SimpleTableVariation data={data} />
-          <MarketInfoCoin data={data} />
+          <div className="xl:hidden">
+            <MarketInfoCoin data={data} />
+          </div>
           <CommunityOpinion data={data} />
           <section className="flex flex-col gap-3 mt-4">
             <span className="text-[#334155] font-bold">
