@@ -17,6 +17,7 @@ import {
   nft,
   products,
 } from "@/constants/dropdown-menu"
+import Link from "next/link"
 
 export const Header = () => {
   const { globalData } = useGeneralContext()
@@ -48,11 +49,13 @@ export const Header = () => {
         <div className="flex justify-between xl:hidden">
           <div className="flex items-center gap-4">
             <AiOutlineMenu size={18} />
-            <Image
-              src={logoHeader}
-              alt="coin gecko logo"
-              className="w-[7.5rem]"
-            />
+            <Link href="/">
+              <Image
+                src={logoHeader}
+                alt="coin gecko logo"
+                className="w-[7.5rem]"
+              />
+            </Link>
           </div>
           <div className="flex xl:hidden">
             <Button3D type="button">Usar App</Button3D>
@@ -60,11 +63,13 @@ export const Header = () => {
         </div>
         <div className="hidden xl:flex xl:items-center xl:justify-between xl:py-3">
           <div className="flex items-center gap-8">
-            <Image
-              src={logoHeader}
-              alt="coin gecko logo"
-              className="w-[9rem] h-[40px]"
-            />
+            <Link href="/">
+              <Image
+                src={logoHeader}
+                alt="coin gecko logo"
+                className="w-[9rem] h-[40px]"
+              />
+            </Link>
             <div className="flex gap-8 font-semibold text-sm text-[#334155]">
               <div
                 className="relative"

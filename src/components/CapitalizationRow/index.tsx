@@ -18,8 +18,8 @@ export const CapitalizationRow = ({
   const totalVolume = data?.total_volume
   const marketCapVariation24h = data?.market_cap_change_percentage_24h_usd
   return (
-    <div className="w-full xl:flex xl:justify-between">
-      <div className="flex whitespace-nowrap gap-2 xl:gap-3 max-w-full xl:w-full overflow-x-scroll xl:overflow-x-hidden md:px-6 py-2 border-y xl:border-y-0 mt-2 xl:mt-0">
+    <div className="w-full xl:flex xl:justify-between ">
+      <div className="flex whitespace-nowrap gap-2 xl:gap-3 max-w-full xl:w-full overflow-x-scroll xl:overflow-x-hidden md:px-6 py-2 border-y xl:border-y-0 mt-2 xl:mt-0 ">
         <div>
           <span className="hidden xl:inline text-xs text-[#64748b]">
             Moedas:{" "}

@@ -71,9 +71,6 @@ interface IMarketData {
 
 const API = axios.create({
   baseURL: "https://api.coingecko.com/api/v3",
-  headers: {
-    "x-cg-api-key": "CG-z9K3NYjxzfiFWMzAb9Lvz1y9",
-  },
 })
 
 export const useCoinGeckoService = () => {
@@ -122,7 +119,9 @@ export const useCoinGeckoService = () => {
         localStorage.removeItem(`${id}LastUpdated`)
       }
     }
-    const response = await API.get<any[]>(`/coins/${id}?sparkline=true`)
+    const response = await API.get<any[]>(
+      `/coins/${id}?sparkline=true&x_cg_demo_api_key=${process.env.API_KEY}`
+    )
     localStorage.setItem(id, JSON.stringify(response.data))
     localStorage.setItem(`${id}LastUpdated`, new Date().getTime().toString())
     return response.data
@@ -141,7 +140,9 @@ export const useCoinGeckoService = () => {
         localStorage.removeItem("globalDataLastUpdated")
       }
     }
-    const response = await API.get<IMarketData>("/global")
+    const response = await API.get<IMarketData>(
+      `/global?x_cg_demo_api_key=${process.env.API_KEY}`
+    )
     localStorage.setItem("globalData", JSON.stringify(response.data))
     localStorage.setItem(
       "globalDataLastUpdated",
@@ -163,7 +164,9 @@ export const useCoinGeckoService = () => {
         localStorage.removeItem("trendingLastUpdated")
       }
     }
-    const response = await API.get<any>("/search/trending")
+    const response = await API.get<any>(
+      `/search/trending?x_cg_demo_api_key=${process.env.API_KEY}`
+    )
     localStorage.setItem("trending", JSON.stringify(response))
     localStorage.setItem("trendingLastUpdated", new Date().getTime().toString())
     return response
