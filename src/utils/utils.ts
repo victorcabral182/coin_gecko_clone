@@ -16,7 +16,7 @@ export const handleMarketCap = (values: any) => {
       )
     : 0
   if (sum) {
-    return sum.toLocaleString()
+    return ((sum as number) / 10 ** 15).toLocaleString() + "T"
   }
   return "error"
 }

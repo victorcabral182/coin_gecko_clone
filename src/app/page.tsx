@@ -303,20 +303,22 @@ export default function Home() {
         </div>
       </div>
       {isActive && (
-        <div className="flex flex-col gap-1">
-          <HighlightsBox
-            type="graphic"
-            description="Capitalização do mercado"
-            variation={marketCapVariation24h.toFixed(2) ?? "error"}
-            amount={handleMarketCap(totalMarketCap)?.toLocaleString()}
-            graphic={"https://www.coingecko.com/total_market_cap.svg"}
-          />
-          <HighlightsBox
-            type="graphic"
-            description="Volume em 24 h"
-            amount={handleMarketCap(totalVolume)}
-            graphic={"https://www.coingecko.com/total_volume.svg"}
-          />
+        <div className="flex flex-col xl:grid xl:grid-cols-2 gap-1">
+          <div className="flex flex-col gap-1 xl:gap-2">
+            <HighlightsBox
+              type="graphic"
+              description="Capitalização do mercado"
+              variation={marketCapVariation24h.toFixed(2) ?? "error"}
+              amount={handleMarketCap(totalMarketCap)?.toLocaleString()}
+              graphic={"https://www.coingecko.com/total_market_cap.svg"}
+            />
+            <HighlightsBox
+              type="graphic"
+              description="Volume em 24 h"
+              amount={handleMarketCap(totalVolume)}
+              graphic={"https://www.coingecko.com/total_volume.svg"}
+            />
+          </div>
           <HighlightsBox
             type="coin"
             trending="trending"

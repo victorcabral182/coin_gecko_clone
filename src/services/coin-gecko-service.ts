@@ -93,6 +93,7 @@ export const useCoinGeckoService = () => {
     }
     const response = await API.get<any[]>("/coins/markets", {
       params: {
+        x_cg_demo_api_key: process.env.API_KEY,
         vs_currency: "usd",
         locale: "en",
         ...data,
