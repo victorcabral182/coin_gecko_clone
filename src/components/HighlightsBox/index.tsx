@@ -1,7 +1,7 @@
 import React from "react"
 import Image from "next/image"
-import { checkCondition } from "@/utils/utils"
 import { FaCaretDown, FaCaretUp, FaMinus } from "react-icons/fa"
+import { checkCondition } from "@/utils/checkCondition"
 
 interface IHighlightsBox {
   graphic?: any // TODO: TIPAR ESSA BAGAÇA

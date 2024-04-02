@@ -1,19 +1,28 @@
 "use client"
 
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { AiOutlineSearch } from "react-icons/ai"
 import { IoMdClose } from "react-icons/io"
 import { ButtonSubMenu } from "../ButtonSubMenu"
 import { TrendingSection } from "../TrendingSection"
 import { FaFireAlt, FaImage, FaShapes } from "react-icons/fa"
+import { useDebounce } from "@/utils/useDebounce"
+import { useCoinGeckoService } from "@/services/coin-gecko-service"
 
 interface SearchInputCompProps {
   openClose: () => void
 }
 
 export const SearchInputComp = ({ openClose }: SearchInputCompProps) => {
+  const { getSearch } = useCoinGeckoService()
+
+  const [list, setList] = useState<any>([])
   const [search, setSearch] = useState<string>("")
   const [optionSelected, setOptionSelected] = useState(1)
+
+  console.log(list)
+
+  const debounceSearch = useDebounce(search)
 
   const searchMenuButtons = [
     {
@@ -34,8 +43,21 @@ export const SearchInputComp = ({ openClose }: SearchInputCompProps) => {
     setSearch("")
   }
 
+  async function tryGetSearch(coinName) {
+    try {
+      const response = await getSearch(coinName)
+      setList(response)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  useEffect(() => {
+    if (debounceSearch) tryGetSearch(debounceSearch)
+  }, [debounceSearch]) // eslint-disable-line
+
   return (
-    <div className="flex flex-col min-h-[calc(100vh-72px)]">
+    <div className="absolute z-10 bg-white flex flex-col min-h-[calc(100vh-72px)]">
       <section className="flex flex-col jus items-center relative w-full z-10">
         <div className="flex w-full items-center gap-0 p-[0.625rem] bg-white shadow-sm">
           <AiOutlineSearch size={28} className="text-[#64748B]" />
@@ -71,7 +93,7 @@ export const SearchInputComp = ({ openClose }: SearchInputCompProps) => {
           ))}
         </div>
       </section>
-      <TrendingSection trendSelected={optionSelected} />
+      <TrendingSection list={list} trendSelected={optionSelected} />
     </div>
   )
 }

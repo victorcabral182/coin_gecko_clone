@@ -173,8 +173,33 @@ export const useCoinGeckoService = () => {
     return response
   }
 
+  const getSearch = async (coinName: string) => {
+    let cache = localStorage.getItem(`search${coinName}`)
+    let lastUpdatedTime = localStorage.getItem(`search${coinName}LastUpdated`)
+    if (cache && lastUpdatedTime) {
+      const currentTime = new Date().getTime()
+      const timeDifference = currentTime - parseInt(lastUpdatedTime)
+      if (timeDifference <= 300000) {
+        return JSON.parse(cache)
+      } else {
+        localStorage.removeItem(`search${coinName}`)
+        localStorage.removeItem(`search${coinName}LastUpdated`)
+      }
+    }
+    const response = await API.get<any>(
+      `/search?query=${coinName}&vs_currency=usd&x_cg_demo_api_key=${process.env.API_KEY}`
+    )
+    localStorage.setItem(`search${coinName}`, JSON.stringify(response))
+    localStorage.setItem(
+      `search${coinName}LastUpdated`,
+      new Date().getTime().toString()
+    )
+    return response
+  }
+
   return {
     checkApiStatus,
+    getSearch,
     getCoinsPaged,
     getGlobalData,
     getTrending,

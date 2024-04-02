@@ -3,7 +3,9 @@ import { Button3D } from "../Button3D"
 import { RxGear } from "react-icons/rx"
 import { FaMinus } from "react-icons/fa"
 import { FaCaretDown, FaCaretUp } from "react-icons/fa"
-import { checkCondition, handleFirstTwo, handleMarketCap } from "@/utils/utils"
+import { handleMarketCap } from "@/utils/marketCap"
+import { checkCondition } from "@/utils/checkCondition"
+import { handleFirstTwo } from "@/utils/firstTwo"
 
 interface CapitalizationRowProps {
   data?: any

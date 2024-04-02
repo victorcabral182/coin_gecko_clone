@@ -1,4 +1,4 @@
-import { checkCondition } from "@/utils/utils"
+import { checkCondition } from "@/utils/checkCondition"
 import { FaCaretDown, FaCaretUp, FaMinus } from "react-icons/fa"
 
 interface ISimpleTableVariation {

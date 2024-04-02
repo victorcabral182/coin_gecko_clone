@@ -11,9 +11,10 @@ import { HighlightsBox } from "@/components/HighlightsBox"
 import { SearchInputBox } from "@/components/SearchInputBox"
 import { CapitalizationRow } from "@/components/CapitalizationRow"
 import { useGeneralContext } from "@/contexts/generalContext/GeneralContext"
-import { checkCondition, handleMarketCap } from "@/utils/utils"
 import { FaCaretDown, FaCaretUp, FaMinus } from "react-icons/fa"
 import Link from "next/link"
+import { checkCondition } from "@/utils/checkCondition"
+import { handleMarketCap } from "@/utils/marketCap"
 
 export default function Home() {
   const { coinsMarket, globalData, setCoinsMarket, trending } =
@@ -272,7 +273,7 @@ export default function Home() {
 
   return (
     <main className="flex flex-col">
-      <div className="flex xl:hidden">
+      <div className="flex xl:hidden relative">
         <SearchInputBox />
       </div>
       <div className="flex xl:hidden">

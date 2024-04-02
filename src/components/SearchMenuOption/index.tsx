@@ -6,7 +6,7 @@ interface SearchMenuOptionProps {
   thumb: string
   title: string
   prefix: string
-  variation: any
+  variation?: any
 }
 
 export const SearchMenuOption = ({
@@ -18,7 +18,13 @@ export const SearchMenuOption = ({
   return (
     <div className="flex justify-between rounded-lg hover:bg-[#f1f5f9] items-center py-3 px-2">
       <div className="flex  ">
-        <Image width={24} height={24} src={a} alt="coin symbol" />
+        <Image
+          width={24}
+          height={24}
+          src={a}
+          loader={() => thumb}
+          alt="coin symbol"
+        />
         <span className="text-sm text-[#334155] ml-2 self-center mr-1 font-semibold">
           {title}
         </span>
@@ -26,7 +32,7 @@ export const SearchMenuOption = ({
           {prefix}
         </span>
       </div>
-      <span className="text-[0.8125rem]">{variation}%</span>
+      {variation && <span className="text-[0.8125rem]">{variation}%</span>}
     </div>
   )
 }

@@ -1,32 +1,22 @@
-import React, { useEffect, useRef, useState } from "react"
+import React, { useRef, useState } from "react"
 import { SearchMenuOption } from "../SearchMenuOption"
+import Link from "next/link"
 
 interface TrendingSectionProps {
   trendSelected?: number
+  list: any
 }
 
-export const TrendingSection = ({ trendSelected }: TrendingSectionProps) => {
+export const TrendingSection = ({
+  trendSelected,
+  list,
+}: TrendingSectionProps) => {
   const [initialState, setInitialState] = useState<boolean>(true)
   const trending = useRef(null)
   const nft = useRef(null)
   const categories = useRef(null)
 
-  const simulate = () => {
-    // ! EXCLUIR APÓS INTEGRAÇÃO
-    const componentsArray = []
-    for (var i = 0; i < 5; i++) {
-      componentsArray.push(
-        <SearchMenuOption
-          key={i}
-          title="Next.js"
-          thumb=""
-          prefix="nxt"
-          variation={5.51}
-        />
-      )
-    }
-    return componentsArray
-  }
+  console.log(list?.data?.coins)
 
   return (
     <section className="max-h-[calc(100vh-180px)] overflow-y-auto">
@@ -41,7 +31,17 @@ export const TrendingSection = ({ trendSelected }: TrendingSectionProps) => {
             </span>
             <div className="w-full border-b border-gray-200" />
           </div>
-          {simulate()}
+          {list?.data?.coins.map((item) => {
+            return (
+              <Link href={`/coin/${item.id}`} key={item.id}>
+                <SearchMenuOption
+                  title={item.name}
+                  thumb={item.thumb}
+                  prefix={item.symbol}
+                />
+              </Link>
+            )
+          })}
         </section>
       )}
       {trendSelected === 2 && (
@@ -55,7 +55,7 @@ export const TrendingSection = ({ trendSelected }: TrendingSectionProps) => {
             </span>
             <div className="w-full border-b border-gray-200" />
           </div>
-          {simulate()}
+          {/* {simulate()} */}
         </section>
       )}
       {trendSelected === 3 && (
@@ -69,7 +69,7 @@ export const TrendingSection = ({ trendSelected }: TrendingSectionProps) => {
             </span>
             <div className="w-full border-b border-gray-200" />
           </div>
-          {simulate()}
+          {/* {simulate()} */}
         </section>
       )}
     </section>

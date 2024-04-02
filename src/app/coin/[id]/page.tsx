@@ -6,7 +6,6 @@ import { useEffect, useState } from "react"
 import { SearchInputBox } from "@/components/SearchInputBox"
 import { CapitalizationRow } from "@/components/CapitalizationRow"
 import { useGeneralContext } from "@/contexts/generalContext/GeneralContext"
-import { checkCondition, handleMarketCap } from "@/utils/utils"
 import { FaCaretDown, FaCaretUp, FaMinus } from "react-icons/fa"
 import { useCoinGeckoService } from "@/services/coin-gecko-service"
 import LinearProgress from "@mui/material/LinearProgress"
@@ -15,6 +14,7 @@ import { Line, ResponsiveLine } from "@nivo/line"
 import { MarketInfoCoin } from "@/components/MarketInfoCoin"
 import { SimpleTableVariation } from "@/components/SimpleTableVariation"
 import { CommunityOpinion } from "@/components/CommunityOpinion"
+import { checkCondition } from "@/utils/checkCondition"
 
 export default function CoinPage({ params }: { params: { id: string } }) {
   const { globalData } = useGeneralContext()

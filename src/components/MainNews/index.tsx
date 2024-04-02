@@ -1,6 +1,6 @@
 "use client"
 
-import { checkCondition } from "@/utils/utils"
+import { checkCondition } from "@/utils/checkCondition"
 import React from "react"
 import { useReducer } from "react"
 import { FaCaretDown, FaCaretUp, FaMinus } from "react-icons/fa"
