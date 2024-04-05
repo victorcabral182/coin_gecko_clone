@@ -20,8 +20,6 @@ export const SearchInputComp = ({ openClose }: SearchInputCompProps) => {
   const [search, setSearch] = useState<string>("")
   const [optionSelected, setOptionSelected] = useState(1)
 
-  console.log(list)
-
   const debounceSearch = useDebounce(search)
 
   const searchMenuButtons = [
@@ -48,16 +46,20 @@ export const SearchInputComp = ({ openClose }: SearchInputCompProps) => {
       const response = await getSearch(coinName)
       setList(response)
     } catch (err) {
-      console.log(err)
+      console.error(err)
     }
   }
 
   useEffect(() => {
-    if (debounceSearch) tryGetSearch(debounceSearch)
+    if (debounceSearch) {
+      tryGetSearch(debounceSearch)
+    } else if (debounceSearch.length === 0) {
+      setList([])
+    }
   }, [debounceSearch]) // eslint-disable-line
 
   return (
-    <div className="absolute z-10 bg-white flex flex-col min-h-[calc(100vh-72px)]">
+    <div className="absolute z-10 bg-white flex flex-col ">
       <section className="flex flex-col jus items-center relative w-full z-10">
         <div className="flex w-full items-center gap-0 p-[0.625rem] bg-white shadow-sm">
           <AiOutlineSearch size={28} className="text-[#64748B]" />
@@ -81,7 +83,7 @@ export const SearchInputComp = ({ openClose }: SearchInputCompProps) => {
             onClick={openClose}
           />
         </div>
-        <div className="flex justify-start gap-2 w-full mt-2 mb-1">
+        {/* <div className="flex justify-start gap-2 w-full mt-2 mb-1">
           {searchMenuButtons.map((item, index) => (
             <ButtonSubMenu
               key={index}
@@ -91,7 +93,7 @@ export const SearchInputComp = ({ openClose }: SearchInputCompProps) => {
               setSelected={() => setOptionSelected(index + 1)}
             />
           ))}
-        </div>
+        </div> */}
       </section>
       <TrendingSection list={list} trendSelected={optionSelected} />
     </div>

@@ -1,11 +1,13 @@
 import Image from "next/image"
 import React from "react"
 import a from "../../app/favicon.ico"
+import { FaCaretDown, FaCaretUp, FaMinus } from "react-icons/fa"
+import { checkCondition } from "@/utils/checkCondition"
 
 interface SearchMenuOptionProps {
   thumb: string
   title: string
-  prefix: string
+  prefix?: string
   variation?: any
 }
 
@@ -17,7 +19,7 @@ export const SearchMenuOption = ({
 }: SearchMenuOptionProps) => {
   return (
     <div className="flex justify-between rounded-lg hover:bg-[#f1f5f9] items-center py-3 px-2">
-      <div className="flex  ">
+      <div className="flex">
         <Image
           width={24}
           height={24}
@@ -32,7 +34,25 @@ export const SearchMenuOption = ({
           {prefix}
         </span>
       </div>
-      {variation && <span className="text-[0.8125rem]">{variation}%</span>}
+      {variation && (
+        <span
+          className="text-[12px]"
+          style={{
+            color: checkCondition(variation)
+              .replace("text-[", "")
+              .replace("]", ""),
+          }}
+        >
+          {variation > 0 ? (
+            <FaCaretUp className="inline mb-1" size={14} />
+          ) : variation < 0 ? (
+            <FaCaretDown className="inline mb-1" size={14} />
+          ) : (
+            <FaMinus className="inline mb-1 " size={14} />
+          )}
+          {variation}%
+        </span>
+      )}
     </div>
   )
 }
