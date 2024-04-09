@@ -18,6 +18,7 @@ import {
   products,
 } from "@/constants/dropdown-menu"
 import Link from "next/link"
+import { MenuMobile } from "../MenuMobile"
 
 export const Header = () => {
   const { globalData } = useGeneralContext()
@@ -45,7 +46,7 @@ export const Header = () => {
       <div className="hidden xl:flex">
         <CapitalizationRow isHeader data={globalData} />
       </div>
-      <header className="flex flex-col w-full gap-2 mb-2 md:px-6 xl:px-0 xl:border-y-[1px] xl:border-y-gray-400 xl:border-opacity-10 xl:mt-2">
+      <header className="flex flex-col w-full relative gap-2 mb-2 md:px-6 xl:px-0 xl:border-y-[1px] xl:border-y-gray-400 xl:border-opacity-10 xl:mt-2">
         <div className="flex justify-between xl:hidden">
           <div className="flex items-center gap-4">
             <AiOutlineMenu size={18} />
@@ -165,6 +166,7 @@ export const Header = () => {
             </div>
           </div>
         </div>
+        {/* <MenuMobile /> */}
       </header>
     </>
   )

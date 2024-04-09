@@ -38,7 +38,7 @@ export const SimpleTableVariation = ({ data }: ISimpleTableVariation) => {
                 .replace("text-[", "")
                 .replace("]", ""),
             }}
-            className="flex items-center text-center py-3 px-2 text-[12px] text-[#0f172a] "
+            className="flex items-center text-center py-3 px-2 text-[12px] text-[#0f172a] justify-center"
           >
             {data?.market_data?.price_change_percentage_24h > 0 ? (
               <FaCaretUp className="inline " size={13} />
@@ -57,7 +57,7 @@ export const SimpleTableVariation = ({ data }: ISimpleTableVariation) => {
                 .replace("text-[", "")
                 .replace("]", ""),
             }}
-            className="flex items-center text-center py-3 text-[12px] text-[#0f172a]"
+            className="flex items-center text-center py-3 text-[12px] text-[#0f172a] justify-center"
           >
             {data?.market_data?.price_change_percentage_7d > 0 ? (
               <FaCaretUp className="inline " size={13} />
@@ -76,7 +76,7 @@ export const SimpleTableVariation = ({ data }: ISimpleTableVariation) => {
                 .replace("text-[", "")
                 .replace("]", ""),
             }}
-            className="flex items-center text-center py-3 text-[12px] text-[#0f172a]"
+            className="flex items-center text-center py-3 text-[12px] text-[#0f172a] justify-center"
           >
             {data?.market_data?.price_change_percentage_14d > 0 ? (
               <FaCaretUp className="inline " size={13} />
@@ -95,7 +95,7 @@ export const SimpleTableVariation = ({ data }: ISimpleTableVariation) => {
                 .replace("text-[", "")
                 .replace("]", ""),
             }}
-            className="flex items-center text-center py-3 text-[12px] text-[#0f172a]"
+            className="flex items-center text-center py-3 text-[12px] text-[#0f172a] justify-center"
           >
             {data?.market_data?.price_change_percentage_30d > 0 ? (
               <FaCaretUp className="inline " size={13} />
@@ -114,7 +114,7 @@ export const SimpleTableVariation = ({ data }: ISimpleTableVariation) => {
                 .replace("text-[", "")
                 .replace("]", ""),
             }}
-            className="flex items-center text-center py-3 text-[12px] text-[#0f172a]"
+            className="flex items-center text-center py-3 text-[12px] text-[#0f172a] justify-center"
           >
             {data?.market_data?.price_change_percentage_60d > 0 ? (
               <FaCaretUp className="inline " size={13} />
@@ -133,7 +133,7 @@ export const SimpleTableVariation = ({ data }: ISimpleTableVariation) => {
                 .replace("text-[", "")
                 .replace("]", ""),
             }}
-            className="flex items-center text-center py-3 text-[12px] text-[#0f172a]"
+            className="flex items-center text-center py-3 text-[12px] text-[#0f172a] justify-center"
           >
             {data?.market_data?.price_change_percentage_1y > 0 ? (
               <FaCaretUp className="inline " size={13} />
