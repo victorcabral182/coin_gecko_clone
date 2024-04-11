@@ -8,6 +8,7 @@ import { AiFillStar } from "react-icons/ai"
 import { AiOutlineMenu } from "react-icons/ai"
 import { SearchInputBox } from "../SearchInputBox"
 import { CapitalizationRow } from "../CapitalizationRow"
+import { AiOutlineClose } from "react-icons/ai"
 import { useGeneralContext } from "@/contexts/generalContext/GeneralContext"
 import { useReducer } from "react"
 import {
@@ -41,15 +42,30 @@ export const Header = () => {
     false
   )
 
+  const [showMenuMobile, action] = useReducer((showMenu) => !showMenu, false)
+
   return (
     <>
       <div className="hidden xl:flex">
         <CapitalizationRow isHeader data={globalData} />
       </div>
-      <header className="flex flex-col w-full relative gap-2 mb-2 md:px-6 xl:px-0 xl:border-y-[1px] xl:border-y-gray-400 xl:border-opacity-10 xl:mt-2">
-        <div className="flex justify-between xl:hidden">
+      <header
+        style={{
+          position: showMenuMobile ? "fixed" : "initial",
+          paddingRight: showMenuMobile ? "32px" : "",
+        }}
+        className={`flex flex-col z-10 w-full relative gap-2 mb-2 md:px-6 xl:px-0 xl:border-y-[1px] xl:border-y-gray-400 xl:border-opacity-10 xl:mt-2 bg-white top-0`}
+      >
+        <div
+          className="flex justify-between xl:hidden"
+          style={{ paddingTop: showMenuMobile ? "16px" : "" }}
+        >
           <div className="flex items-center gap-4">
-            <AiOutlineMenu size={18} />
+            {!showMenuMobile ? (
+              <AiOutlineMenu size={18} onClick={action} />
+            ) : (
+              <AiOutlineClose size={18} onClick={action} />
+            )}
             <Link href="/">
               <Image
                 src={logoHeader}
@@ -166,7 +182,8 @@ export const Header = () => {
             </div>
           </div>
         </div>
-        {/* <MenuMobile /> */}
+        {showMenuMobile && <div className="h-[40px]" />}
+        {showMenuMobile && <MenuMobile />}
       </header>
     </>
   )
