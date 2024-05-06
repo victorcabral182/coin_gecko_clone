@@ -4,13 +4,13 @@ import { FaCaretDown, FaCaretUp, FaMinus } from "react-icons/fa"
 import { checkCondition } from "@/utils/checkCondition"
 
 interface IHighlightsBox {
-  graphic?: any // TODO: TIPAR ESSA BAGAÇA
+  graphic?: string
   amount?: number | string
   variation?: number
   description?: string
-  type?: "graphic" | "coin"
-  data?: any // TODO: TIPAR ESSA BAGAÇA
-  trending?: "trending" | "gainers"
+  type?: string | "graphic" | "coin"
+  data?: any
+  trending?: string | "trending" | "gainers"
 }
 
 export const HighlightsBox = ({

@@ -1,11 +1,12 @@
 import Link from "next/link"
+import { IDropDownData } from "@/types/dropdrown"
 
-interface IDropDown {
+interface IDropDownProps {
   isOpen: boolean
-  options: any
+  options: IDropDownData[]
 }
 
-export const Dropdown = ({ options, isOpen }: IDropDown) => {
+export const Dropdown = ({ options, isOpen }: IDropDownProps) => {
   return (
     <>
       {isOpen && (

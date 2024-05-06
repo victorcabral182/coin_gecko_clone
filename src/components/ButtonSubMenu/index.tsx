@@ -1,9 +1,9 @@
-import React from "react"
+import React, { ReactNode } from "react"
 
 interface ButtonSubMenu {
   title: string
-  iconLeft?: any
-  iconRight?: any
+  iconLeft?: ReactNode | undefined | null
+  iconRight?: ReactNode | undefined | null
   selected?: boolean
   setSelected?: () => void
 }

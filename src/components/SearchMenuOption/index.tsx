@@ -8,7 +8,7 @@ interface SearchMenuOptionProps {
   thumb: string
   title: string
   prefix?: string
-  variation?: any
+  variation?: number | string | null | undefined
 }
 
 export const SearchMenuOption = ({
@@ -38,14 +38,14 @@ export const SearchMenuOption = ({
         <span
           className="text-[12px]"
           style={{
-            color: checkCondition(variation)
+            color: checkCondition(Number(variation))
               .replace("text-[", "")
               .replace("]", ""),
           }}
         >
-          {variation > 0 ? (
+          {Number(variation) > 0 ? (
             <FaCaretUp className="inline mb-1" size={14} />
-          ) : variation < 0 ? (
+          ) : Number(variation) < 0 ? (
             <FaCaretDown className="inline mb-1" size={14} />
           ) : (
             <FaMinus className="inline mb-1 " size={14} />

@@ -6,16 +6,17 @@ import { FaCaretDown, FaCaretUp } from "react-icons/fa"
 import { handleMarketCap } from "@/utils/marketCap"
 import { checkCondition } from "@/utils/checkCondition"
 import { handleFirstTwo } from "@/utils/firstTwo"
+import { ICapitalizationRowData } from "@/types/capitalization-row"
 
-interface CapitalizationRowProps {
-  data?: any
+interface ICapitalizationRowProps {
+  data?: ICapitalizationRowData
   isHeader?: boolean
 }
 
 export const CapitalizationRow = ({
   data,
   isHeader,
-}: CapitalizationRowProps) => {
+}: ICapitalizationRowProps) => {
   const totalMarketCap = data?.total_market_cap
   const totalVolume = data?.total_volume
   const marketCapVariation24h = data?.market_cap_change_percentage_24h_usd
@@ -43,7 +44,7 @@ export const CapitalizationRow = ({
             Capitalização de mercado:{" "}
           </span>
           <span className="text-xs text-[#334155] font-semibold">
-            US$ {data && handleMarketCap(totalMarketCap)}
+            US$ {data && handleMarketCap(Number(totalMarketCap))}
           </span>
           <span
             style={{
@@ -68,13 +69,13 @@ export const CapitalizationRow = ({
         <div>
           <span className="text-xs text-[#64748b]">Vol. 24h </span>
           <span className="text-xs text-[#334155] font-semibold">
-            US$ {handleMarketCap(totalVolume) ?? ""}
+            US$ {handleMarketCap(Number(totalVolume)) ?? ""}
           </span>
         </div>
         <div>
           <span className="text-xs text-[#64748b]">Domínio </span>
           <span className="text-xs text-[#334155] font-semibold uppercase">
-            {handleFirstTwo(data?.market_cap_percentage) ?? ""}
+            {handleFirstTwo(Number(data?.market_cap_percentage)) ?? ""}
           </span>
         </div>
       </div>

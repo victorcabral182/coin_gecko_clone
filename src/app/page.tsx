@@ -6,7 +6,12 @@ import { AiFillStar } from "react-icons/ai"
 import { Switch } from "@/components/Switch"
 import { AiOutlineStar } from "react-icons/ai"
 import { MainNews } from "@/components/MainNews"
-import { DataGrid, GridColDef } from "@mui/x-data-grid"
+import {
+  DataGrid,
+  GridColDef,
+  GridRenderCellParams,
+  GridRowProps,
+} from "@mui/x-data-grid"
 import { HighlightsBox } from "@/components/HighlightsBox"
 import { SearchInputBox } from "@/components/SearchInputBox"
 import { CapitalizationRow } from "@/components/CapitalizationRow"
@@ -34,7 +39,7 @@ export default function Home() {
       headerName: "#",
       headerAlign: "right",
       width: 60,
-      renderCell: (e) => {
+      renderCell: (e: GridRenderCellParams) => {
         const handleFavorite = (id: number) => {
           setCoinsMarket((prevData) => {
             const updatedRows = prevData.map((row) =>
@@ -65,8 +70,8 @@ export default function Home() {
     {
       field: "name",
       headerName: "Moeda",
-      width: 260,
-      renderCell: (e) => {
+      flex: 1,
+      renderCell: (e: GridRenderCellParams) => {
         const imageLoader = () => {
           return e.row.image
         }
@@ -110,7 +115,7 @@ export default function Home() {
       headerAlign: "right",
       width: 120,
       align: "right",
-      renderCell: (e: any) => (
+      renderCell: (e: GridRenderCellParams) => (
         <span className="font-extralight">
           US
           {e?.row?.current_price
@@ -128,7 +133,7 @@ export default function Home() {
       headerAlign: "right",
       align: "right",
       width: 70,
-      renderCell: (e: any) => {
+      renderCell: (e: GridRenderCellParams) => {
         const oneHourVariation = e?.row?.price_change_percentage_1h_in_currency
         const color = checkCondition(oneHourVariation)
         return (
@@ -154,7 +159,7 @@ export default function Home() {
       headerAlign: "right",
       align: "right",
       width: 75,
-      renderCell: (e: any) => {
+      renderCell: (e: GridRenderCellParams) => {
         const twentyFourHourVariation =
           e?.row?.price_change_percentage_24h_in_currency
         const color = checkCondition(twentyFourHourVariation)
@@ -181,7 +186,7 @@ export default function Home() {
       headerAlign: "right",
       align: "right",
       width: 70,
-      renderCell: (e: any) => {
+      renderCell: (e: GridRenderCellParams) => {
         const sevenDaysVariation =
           e?.row?.price_change_percentage_7d_in_currency
         const color = checkCondition(sevenDaysVariation)
@@ -208,8 +213,7 @@ export default function Home() {
       headerAlign: "right",
       align: "right",
       width: 170,
-      // flex: 1,
-      renderCell: (e: any) => {
+      renderCell: (e: GridRenderCellParams) => {
         const totalVolume = e?.row?.total_volume
         return (
           <span className={`font-extralight`}>
@@ -230,7 +234,7 @@ export default function Home() {
       headerAlign: "right",
       align: "right",
       width: 200,
-      renderCell: (e: any) => {
+      renderCell: (e: GridRenderCellParams) => {
         const marketCap = e?.row?.market_cap
         return (
           <span className={`font-extralight`}>
@@ -251,7 +255,7 @@ export default function Home() {
       headerAlign: "right",
       align: "right",
       width: 160,
-      renderCell: (e: any) => {
+      renderCell: (e: GridRenderCellParams) => {
         const id = e.row.image.split("/")[5]
         const url = `https://www.coingecko.com/coins/${id}/sparkline.svg`
         return (

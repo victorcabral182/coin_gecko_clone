@@ -1,4 +1,4 @@
-export const handleMarketCap = (values: any) => {
+export const handleMarketCap = (values: number) => {
   const sum = values
     ? Object?.values(values)?.reduce(
         (acc: number, value: number) => acc + value,

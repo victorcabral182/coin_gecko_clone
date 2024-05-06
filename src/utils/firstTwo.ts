@@ -1,4 +1,4 @@
-export const handleFirstTwo = (values: any) => {
+export const handleFirstTwo = (values: number | string) => {
   const list: any = values ? Object?.entries(values) : null
   const first = list ? list[0] : 0
   const second = list ? list[1] : 0
