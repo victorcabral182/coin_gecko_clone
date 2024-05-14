@@ -20,7 +20,7 @@ export const Button3D = ({
     <>
       <div>
         <button
-          type="button"
+          aria-label="Button"
           className={`${wFull && "w-full"} ${
             variant === "filled"
               ? "bg-[#4bcc00] hover:bg-[#409900] active:bg-[#4bcc0080] py-[0.375rem] px-[0.625rem] rounded-[0.5rem] border-b-[5px] border-b-[#229203] hover:border-b-[#2C6D03] text-xs text-white font-semibold"
