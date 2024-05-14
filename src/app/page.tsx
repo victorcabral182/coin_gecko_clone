@@ -1,25 +1,20 @@
 "use client"
 
+import Link from "next/link"
 import Image from "next/image"
 import { useReducer } from "react"
 import { AiFillStar } from "react-icons/ai"
 import { Switch } from "@/components/Switch"
 import { AiOutlineStar } from "react-icons/ai"
 import { MainNews } from "@/components/MainNews"
-import {
-  DataGrid,
-  GridColDef,
-  GridRenderCellParams,
-  GridRowProps,
-} from "@mui/x-data-grid"
+import { handleMarketCap } from "@/utils/marketCap"
+import { checkCondition } from "@/utils/checkCondition"
 import { HighlightsBox } from "@/components/HighlightsBox"
 import { SearchInputBox } from "@/components/SearchInputBox"
+import { FaCaretDown, FaCaretUp, FaMinus } from "react-icons/fa"
 import { CapitalizationRow } from "@/components/CapitalizationRow"
 import { useGeneralContext } from "@/contexts/generalContext/GeneralContext"
-import { FaCaretDown, FaCaretUp, FaMinus } from "react-icons/fa"
-import Link from "next/link"
-import { checkCondition } from "@/utils/checkCondition"
-import { handleMarketCap } from "@/utils/marketCap"
+import { DataGrid, GridColDef, GridRenderCellParams } from "@mui/x-data-grid"
 
 export default function Home() {
   const { coinsMarket, globalData, setCoinsMarket, trending } =
@@ -71,6 +66,7 @@ export default function Home() {
       field: "name",
       headerName: "Moeda",
       flex: 1,
+      minWidth: 200,
       renderCell: (e: GridRenderCellParams) => {
         const imageLoader = () => {
           return e.row.image
@@ -97,7 +93,7 @@ export default function Home() {
                 </span>
               </div>
             </div>
-            <div className="">
+            <div className="hidden xl:flex">
               <button
                 type="button"
                 className="border border-[#35b000] text-[#35b000] px-2 rounded-md text-xs"

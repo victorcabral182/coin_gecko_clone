@@ -44,7 +44,7 @@ export const CapitalizationRow = ({
             Capitalização de mercado:{" "}
           </span>
           <span className="text-xs text-[#334155] font-semibold">
-            US$ {data && handleMarketCap(Number(totalMarketCap))}
+            US$ {data && handleMarketCap(totalMarketCap)}
           </span>
           <span
             style={{
@@ -69,13 +69,13 @@ export const CapitalizationRow = ({
         <div>
           <span className="text-xs text-[#64748b]">Vol. 24h </span>
           <span className="text-xs text-[#334155] font-semibold">
-            US$ {handleMarketCap(Number(totalVolume)) ?? ""}
+            US$ {handleMarketCap(totalVolume) ?? ""}
           </span>
         </div>
         <div>
           <span className="text-xs text-[#64748b]">Domínio </span>
           <span className="text-xs text-[#334155] font-semibold uppercase">
-            {handleFirstTwo(Number(data?.market_cap_percentage)) ?? ""}
+            {handleFirstTwo(data?.market_cap_percentage) ?? ""}
           </span>
         </div>
       </div>

@@ -1,16 +1,7 @@
 "use client"
 
+import Link from "next/link"
 import Image from "next/image"
-import logoHeader from "../../assets/img/coingecko.svg"
-import { Button3D } from "../Button3D"
-import { Dropdown } from "../Dropdown"
-import { AiFillStar } from "react-icons/ai"
-import { AiOutlineMenu } from "react-icons/ai"
-import { SearchInputBox } from "../SearchInputBox"
-import { CapitalizationRow } from "../CapitalizationRow"
-import { AiOutlineClose } from "react-icons/ai"
-import { useGeneralContext } from "@/contexts/generalContext/GeneralContext"
-import { useReducer } from "react"
 import {
   criptoCurrencies,
   currencyExchange,
@@ -18,8 +9,17 @@ import {
   nft,
   products,
 } from "@/constants/dropdown-menu"
-import Link from "next/link"
+import { useReducer } from "react"
+import { Button3D } from "../Button3D"
+import { Dropdown } from "../Dropdown"
 import { MenuMobile } from "../MenuMobile"
+import { AiFillStar } from "react-icons/ai"
+import { AiOutlineMenu } from "react-icons/ai"
+import { AiOutlineClose } from "react-icons/ai"
+import { SearchInputBox } from "../SearchInputBox"
+import logoHeader from "../../assets/img/coingecko.svg"
+import { CapitalizationRow } from "../CapitalizationRow"
+import { useGeneralContext } from "@/contexts/generalContext/GeneralContext"
 
 export const Header = () => {
   const { globalData } = useGeneralContext()
