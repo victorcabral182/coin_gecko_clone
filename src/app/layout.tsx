@@ -4,6 +4,7 @@ import { Inter } from "next/font/google"
 import { Header } from "@/components/Header"
 import { GeneralContextProvider } from "@/contexts/generalContext/GeneralContext"
 import { Footer } from "@/components/Footer"
+import { Analytics } from "@vercel/analytics/react"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -23,6 +24,7 @@ export default function RootLayout({
       <body
         className={`${inter.className} p-4 xl:mx-[7%] 2xl:mx-[15%] xl:pt-2`}
       >
+        <Analytics />
         <GeneralContextProvider>
           <Header />
           {children}

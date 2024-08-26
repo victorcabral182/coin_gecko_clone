@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import Image from "next/image"
-import { useReducer } from "react"
+import { useReducer, useState, useEffect } from "react"
 import { AiFillStar } from "react-icons/ai"
 import { Switch } from "@/components/Switch"
 import { AiOutlineStar } from "react-icons/ai"
@@ -15,6 +15,7 @@ import { FaCaretDown, FaCaretUp, FaMinus } from "react-icons/fa"
 import { CapitalizationRow } from "@/components/CapitalizationRow"
 import { useGeneralContext } from "@/contexts/generalContext/GeneralContext"
 import { DataGrid, GridColDef, GridRenderCellParams } from "@mui/x-data-grid"
+import { Skeleton } from "@mui/material"
 
 export default function Home() {
   const { coinsMarket, globalData, setCoinsMarket, trending } =
@@ -328,36 +329,55 @@ export default function Home() {
           />
         </div>
       )}
-      <section>
-        <DataGrid
-          sx={{
-            border: 0,
-            "&.MuiDataGrid-root .MuiDataGrid-columnHeader:focus, &.MuiDataGrid-root .MuiDataGrid-cell:focus":
-              {
-                outline: "none",
+      <section className="w-full flex flex-col ">
+        {coinsMarket ? (
+          <DataGrid
+            sx={{
+              border: 0,
+              "&.MuiDataGrid-root .MuiDataGrid-columnHeader:focus, &.MuiDataGrid-root .MuiDataGrid-cell:focus":
+                {
+                  outline: "none",
+                },
+              ".MuiDataGrid-columnSeparator": {
+                display: "none",
               },
-            ".MuiDataGrid-columnSeparator": {
-              display: "none",
-            },
-            ".MuiDataGrid-columnHeader": {
-              fontSize: 12,
-            },
-            ".MuiDataGrid-columnHeaderTitle": {
-              fontWeight: 700,
-            },
-          }}
-          columnHeaderHeight={41.5}
-          rowHeight={68.5}
-          showColumnVerticalBorder={false}
-          hideFooter
-          rows={coinsMarket}
-          columns={columns}
-          rowSelection={false}
-          disableColumnMenu
-          disableRowSelectionOnClick
-          disableColumnFilter
-          disableColumnSelector
-        />
+              ".MuiDataGrid-columnHeader": {
+                fontSize: 12,
+              },
+              ".MuiDataGrid-columnHeaderTitle": {
+                fontWeight: 700,
+              },
+            }}
+            columnHeaderHeight={41.5}
+            rowHeight={68.5}
+            showColumnVerticalBorder={false}
+            hideFooter
+            rows={coinsMarket}
+            columns={columns}
+            rowSelection={false}
+            disableColumnMenu
+            disableRowSelectionOnClick
+            disableColumnFilter
+            disableColumnSelector
+          />
+        ) : (
+          <>
+            <Skeleton width="full" height={80} className="m-0" />
+            <Skeleton width="full" height={80} className="m-0" />
+            <Skeleton width="full" height={80} className="m-0" />
+            <Skeleton width="full" height={80} className="m-0" />
+            <Skeleton width="full" height={80} className="m-0" />
+            <Skeleton width="full" height={80} className="m-0" />
+            <Skeleton width="full" height={80} className="m-0" />
+            <Skeleton width="full" height={80} className="m-0" />
+            <Skeleton width="full" height={80} className="m-0" />
+            <Skeleton width="full" height={80} className="m-0" />
+            <Skeleton width="full" height={80} className="m-0" />
+            <Skeleton width="full" height={80} className="m-0" />
+            <Skeleton width="full" height={80} className="m-0" />
+            <Skeleton width="full" height={80} className="m-0" />
+          </>
+        )}
       </section>
     </main>
   )
