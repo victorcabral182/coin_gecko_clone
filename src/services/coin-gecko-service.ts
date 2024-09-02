@@ -25,7 +25,7 @@ export const useCoinGeckoService = () => {
     }
     const response = await API.get<any[]>("/coins/markets", {
       params: {
-        x_cg_demo_api_key: process.env.API_KEY,
+        x_cg_demo_api_key: process.env.NEXT_PUBLIC_API_KEY,
         vs_currency: "usd",
         locale: "en",
         ...data,
@@ -53,7 +53,7 @@ export const useCoinGeckoService = () => {
       }
     }
     const response = await API.get<any[]>(
-      `/coins/${id}?sparkline=true&x_cg_demo_api_key=${process.env.API_KEY}`
+      `/coins/${id}?sparkline=true&x_cg_demo_api_key=${process.env.NEXT_PUBLIC_API_KEY}`
     )
     localStorage.setItem(id, JSON.stringify(response.data))
     localStorage.setItem(`${id}LastUpdated`, new Date().getTime().toString())
@@ -74,7 +74,7 @@ export const useCoinGeckoService = () => {
       }
     }
     const response = await API.get<IMarketData>(
-      `/global?x_cg_demo_api_key=${process.env.API_KEY}`
+      `/global?x_cg_demo_api_key=${process.env.NEXT_PUBLIC_API_KEY}`
     )
     localStorage.setItem("globalData", JSON.stringify(response.data))
     localStorage.setItem(
@@ -98,7 +98,7 @@ export const useCoinGeckoService = () => {
       }
     }
     const response = await API.get<any>(
-      `/search/trending?x_cg_demo_api_key=${process.env.API_KEY}`
+      `/search/trending?x_cg_demo_api_key=${process.env.NEXT_PUBLIC_API_KEY}`
     )
     localStorage.setItem("trending", JSON.stringify(response))
     localStorage.setItem("trendingLastUpdated", new Date().getTime().toString())
@@ -119,7 +119,7 @@ export const useCoinGeckoService = () => {
       }
     }
     const response = await API.get<any>(
-      `/search?query=${coinName}&vs_currency=usd&x_cg_demo_api_key=${process.env.API_KEY}`
+      `/search?query=${coinName}&vs_currency=usd&x_cg_demo_api_key=${process.env.NEXT_PUBLIC_API_KEY}`
     )
     localStorage.setItem(`search${coinName}`, JSON.stringify(response))
     localStorage.setItem(
