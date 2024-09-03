@@ -1,45 +1,26 @@
 "use client"
 
-import React, { useEffect, useState } from "react"
-import { AiOutlineSearch } from "react-icons/ai"
 import { IoMdClose } from "react-icons/io"
-import { ButtonSubMenu } from "../ButtonSubMenu"
-import { TrendingSection } from "../TrendingSection"
-import { FaFireAlt, FaImage, FaShapes } from "react-icons/fa"
+import { AiOutlineSearch } from "react-icons/ai"
 import { useDebounce } from "@/utils/useDebounce"
+import { TrendingSection } from "../TrendingSection"
+import React, { useEffect, useRef, useState } from "react"
 import { useCoinGeckoService } from "@/services/coin-gecko-service"
 
-interface SearchInputCompProps {
+interface ISearchInputCompProps {
+  open: boolean
   openClose: () => void
 }
 
-export const SearchInputComp = ({ openClose }: SearchInputCompProps) => {
+export const SearchInputComp = ({ openClose, open }: ISearchInputCompProps) => {
   const { getSearch } = useCoinGeckoService()
 
   const [list, setList] = useState<any>([])
   const [search, setSearch] = useState<string>("")
-  const [optionSelected, setOptionSelected] = useState(1)
+  const [optionSelected] = useState(1)
 
+  const inputRef = useRef(null)
   const debounceSearch = useDebounce(search)
-
-  const searchMenuButtons = [
-    {
-      title: "Tendências",
-      icon: <FaFireAlt size={14} />,
-    },
-    {
-      title: "NFTs",
-      icon: <FaImage size={14} />,
-    },
-    {
-      title: "Categorias",
-      icon: <FaShapes size={14} />,
-    },
-  ]
-
-  const cleanSearchInput = () => {
-    setSearch("")
-  }
 
   async function tryGetSearch(coinName) {
     try {
@@ -50,6 +31,10 @@ export const SearchInputComp = ({ openClose }: SearchInputCompProps) => {
     }
   }
 
+  const cleanSearchInput = () => {
+    setSearch("")
+  }
+
   useEffect(() => {
     if (debounceSearch) {
       tryGetSearch(debounceSearch)
@@ -58,13 +43,20 @@ export const SearchInputComp = ({ openClose }: SearchInputCompProps) => {
     }
   }, [debounceSearch]) // eslint-disable-line
 
+  useEffect(() => {
+    if (open && inputRef.current) {
+      inputRef.current.select()
+    }
+  }, [open])
+
   return (
-    <div className="absolute z-10 bg-white flex flex-col ">
+    <div className="absolute z-10 lg:top-[-28px] bg-white flex flex-col w-full lg:w-[calc(100vw-1410px)]">
       <section className="flex flex-col jus items-center relative w-full z-10">
         <div className="flex w-full items-center gap-0 p-[0.625rem] bg-white shadow-sm">
           <AiOutlineSearch size={28} className="text-[#64748B]" />
           <input
             type="text"
+            ref={inputRef}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className=" w-[90%] p-[0.625rem] focus-within:outline-none"
@@ -83,17 +75,6 @@ export const SearchInputComp = ({ openClose }: SearchInputCompProps) => {
             onClick={openClose}
           />
         </div>
-        {/* <div className="flex justify-start gap-2 w-full mt-2 mb-1">
-          {searchMenuButtons.map((item, index) => (
-            <ButtonSubMenu
-              key={index}
-              title={item.title}
-              iconLeft={item.icon}
-              selected={optionSelected === index + 1}
-              setSelected={() => setOptionSelected(index + 1)}
-            />
-          ))}
-        </div> */}
       </section>
       <TrendingSection list={list} trendSelected={optionSelected} />
     </div>
