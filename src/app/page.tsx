@@ -330,7 +330,7 @@ export default function Home() {
         </div>
       )}
       <section className="w-full flex flex-col ">
-        {coinsMarket ? (
+        {coinsMarket?.length ? (
           <DataGrid
             sx={{
               border: 0,
